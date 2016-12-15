@@ -1,10 +1,42 @@
 body {
-	background-color: orange;
+
+	background-image: url("/Users/sammatluck/Desktop/Online course - Coding/samatluck.github.io/Unit_1/image/sunset3.jpg"); 
+	background-repeat: no-repeat;
+	background-position: center;
+	background-color: black;
+	background-size: 1500px 1500px;
 
 
 }
 
-h1, p {
-	color: blue;
+h1  {
+
+	font-size:65px;
+	color:black;
+	font-family: "Gadget", monospace;
 
 }
+
+h2 {
+
+	font-size: 35px;
+	position: relative;
+	left: 110px;
+	top:550px;
+	color:black;
+	font-family: "Gadget", monospace;
+}
+
+h3 {
+
+	font-size: 40px;
+	position: relative;
+	left:1px;
+	top:-75px;
+	color:black;
+	font-family: "Gadget", monospace;
+
+
+}
+
+/Users/sammatluck/Desktop/Online course - Coding/samatluck.github.io/Unit_1/css/style.css
