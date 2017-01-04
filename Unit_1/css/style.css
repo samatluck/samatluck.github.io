@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css?family=Linden+Hill|Port+Lligat+Sans|Ramabhadra');
+
 body {
 
 	background-image: url("../image/sunset3.jpg"); 
@@ -12,20 +14,18 @@ h1  {
 
 	font-size:65px;
 	color:black;
-	font-family: "Gadget", monospace;
+	font-family: 'Linden Hill', serif;
 
 }
 
 h2 {
-
 	font-size: 45px;
 	position: relative;
 	left: 110px;
 	top:580px;
 	color:black;
-	font-family: "Gadget", monospace;
+	font-family: "Port Lligat Sans", Serif;
 }
-
 h3 {
 
 	font-size: 35px;
@@ -33,10 +33,8 @@ h3 {
 	left: 110px;
 	top:550px;
 	color:black;
-	font-family: "Gadget", monospace;
+	font-family: "Port Lligat Sans", Sans-Serif;
 }
-
-
 h4 {
 
 	font-size: 40px;
@@ -44,9 +42,5 @@ h4 {
 	left:1px;
 	top:-180px;
 	color:black;
-	font-family: "Gadget", monospace;
-
-
+	font-family: "Port Lligat Sans", monospace;
 }
-
-/Users/sammatluck/Desktop/Online course - Coding/samatluck.github.io/Unit_1/css/style.css
