@@ -1,20 +1,21 @@
 @import url('https://fonts.googleapis.com/css?family=Linden+Hill|Port+Lligat+Sans|Ramabhadra');
+	
+
+
 
 body {
-
 	background-image: url("../image/sunset3.jpg"); 
 	background-repeat: no-repeat;
 	background-position: center;
 	background-size: 1500px 1500px;
 
-
 }
 
 h1  {
-
-	font-size:65px;
+	padding:100px;
+	font-size:100px;
 	color:black;
-	font-family: 'Linden Hill', serif;
+	font-family: 'Linden Hil', serif;
 
 }
 
@@ -27,8 +28,7 @@ h2 {
 	font-family: "Port Lligat Sans", Serif;
 }
 h3 {
-
-	font-size: 35px;
+	font-size: 45px;
 	position: relative;
 	left: 110px;
 	top:550px;
@@ -36,7 +36,6 @@ h3 {
 	font-family: "Port Lligat Sans", Sans-Serif;
 }
 h4 {
-
 	font-size: 40px;
 	position: relative;
 	left:1px;
