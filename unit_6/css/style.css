@@ -72,3 +72,67 @@ h4 {
 	color:black;
 	font-family: "Port Lligat Sans", monospace;
 }
+#explanations {
+	background-color: magenta;
+	border: 1px black solid;
+	padding: 20px;
+	float:left;
+}
+
+#left {
+	background-color: #FFB7CF;
+	border: 1px black solid;
+	padding: 20px;
+	float: left;
+	width: 30%
+}
+
+#center {
+	background-color: #E582A2;
+	border: 1px black solid;
+	padding: 20px;
+	display: inline-block;
+	width: 30%
+}
+#right {
+	background-color: #E55B88;
+	border: 1px black solid;
+	padding: 20px;
+	float:right;
+	width: 30.5%
+}
+
+.clearfix:after {
+	visibility: hidden;
+	display: block;
+	font-size: 0;
+	content:" ";
+	clear: both;
+	height: 0;
+}
+
+#DroneSafety {
+	font-size:20px;
+	color:black;
+	font-family: 'Linden Hill', serif;
+	border-bottom: 4px solid black;
+	text-transform: uppercase;
+}
+
+#FAA {
+	font-size:20px;
+	color:black;
+	font-family: 'Linden Hill', serif;
+	border-bottom: 4px solid black;
+	text-transform: uppercase;
+}
+
+#Experience {
+	font-size:20px;
+	color:black;
+	font-family: 'Linden Hill', serif;
+	border-bottom: 4px solid black;
+	text-transform: uppercase;
+}
+
+
