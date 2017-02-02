@@ -1,0 +1,162 @@
+@import url('https://fonts.googleapis.com/css?family=Linden+Hill|Port+Lligat+Sans|Ramabhadra');
+
+body {
+
+	background-image: url("../image/sunset3.jpg"); 
+	background-repeat: no-repeat;
+	background-position: center;
+	background-size: 1500px 1800px;
+
+}
+
+header{
+	padding: 5px;
+
+}
+
+li {
+	display: inline;
+	padding: 100px;
+}
+
+ul {
+	border: 1px black solid;
+	padding:5px;
+}
+
+aside {
+	padding: 1x;
+
+}
+
+footer{
+	padding:1px;
+}
+
+
+h1  {
+	font-size:100px;
+	color:black;
+	font-family: 'Linden Hill', serif;
+}
+
+nav {
+	text-align: center;
+    }
+
+h2 {
+	font-size: 45px;
+	position: relative;
+	left: 110px;
+	top:580px;
+	color:black;
+	font-family: "Port Lligat Sans", Serif;
+}
+h3 {
+
+	font-size: 35px;
+	position: relative;
+	color:black;
+	font-family: "Port Lligat Sans", Sans-Serif;
+}
+h4 {
+
+	font-size: 40px;
+	position: relative;
+	color:black;
+	font-family: "Port Lligat Sans", monospace;
+}
+#explanations {
+	position: absolute;
+	top: 600px;
+	padding: 20px;
+	float:left;
+}
+
+#left {
+	border: 1px black solid;
+	padding: 20px;
+	float: left;
+	width: 30%
+}
+
+#center {
+	border: 1px black solid;
+	padding: 20px;
+	display: inline-block;
+	width: 30%
+}
+#right {
+	border: 1px black solid;
+	padding: 20px;
+	float:right;
+	width: 30.5%
+}
+.clearfix:after {
+	visibility: hidden;
+	display: block;
+	font-size: 0;
+	content:" ";
+	clear: both;
+	height: 0;
+}
+
+#DroneSafety {
+	font-size:20px;
+	color:black;
+	font-family: 'Linden Hill', serif;
+	border-bottom: 4px solid black;
+	text-transform: uppercase;
+}
+
+#FAA {
+	font-size:20px;
+	color:black;
+	font-family: 'Linden Hill', serif;
+	border-bottom: 4px solid black;
+	text-transform: uppercase;
+}
+
+#Experience {
+	font-size:20px;
+	color:black;
+	font-family: 'Linden Hill', serif;
+	border-bottom: 4px solid black;
+	text-transform: uppercase;
+}
+
+@media only screen and (max-width: 800px) {
+
+#left {
+	border: 1px black solid;
+	float: none;
+	text-align: center;
+}
+
+#center {
+	border: 1px black solid;
+	padding: 20px;
+	display: inline-block;
+}
+#right {
+	border: 1px black solid;
+	padding: 20px;
+	float:none;
+}
+
+
+h1 {
+	font-size: 50px;
+}
+body {
+	background-size: 1500px 5000px;
+}}
+
+
+
+@media only screen and (max-width: 550px){
+
+h1 {font-size: 30px;
+} }
+
+
