@@ -1,0 +1,52 @@
+#!/bin/bash
+#SBATCH --partition=interactive		# Partition
+#SBATCH --qos=interactive		# Quality of Service
+#SBATCH --job-name=COSC6200MIC  # Job Name
+#SBATCH --time=01:00:00		# WallTime
+#SBATCH --nodes=1 		# Number of Nodes
+#SBATCH --ntasks-per-node=1 	# Number of tasks (MPI presseces)
+#SBATCH --cpus-per-task=1 	# Number of processors per task OpenMP threads()
+#SBATCH --gres=mic:2  		# Number of Co-Processors
+ #SBATCH --output=slurm.%j.out
+
+module load intel-psxe/2016
+
+export MKL_MIC_ENABLE=1
+export OFFLOAD_DEVICES=1
+export MIC_ENV_PREFIX=MIC
+export OMP_NUM_THREADS=$SLURM_CPUS_PER_TASK
+export MIC_OMP_NUM_THREADS=240
+export OFFLOAD_REPORT=2
+
+time ./ex74 1
+mv resEx74.dat resEx74_01.dat
+time ./ex74 2
+mv resEx74.dat resEx74_02.dat
+time ./ex74 3
+mv resEx74.dat resEx74_03.dat
+time ./ex74 4
+mv resEx74.dat resEx74_04.dat
+time ./ex74 5
+mv resEx74.dat resEx74_05.dat
+time ./ex74 6
+mv resEx74.dat resEx74_06.dat
+time ./ex74 7
+mv resEx74.dat resEx74_07.dat
+time ./ex74 8
+mv resEx74.dat resEx74_08.dat
+time ./ex74 9
+mv resEx74.dat resEx74_09.dat
+time ./ex74 10
+mv resEx74.dat resEx74_10.dat
+time ./ex74 11
+mv resEx74.dat resEx74_11.dat
+time ./ex74 12
+mv resEx74.dat resEx74_12.dat
+time ./ex74 13
+mv resEx74.dat resEx74_13.dat
+time ./ex74 14
+mv resEx74.dat resEx74_14.dat
+time ./ex74 15
+mv resEx74.dat resEx74_15.dat
+time ./ex74 16
+mv resEx74.dat resEx74_16.dat
