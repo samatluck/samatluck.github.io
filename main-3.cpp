@@ -7,6 +7,8 @@
 #include <sys/time.h>
 #include <omp.h>
 #include <iomanip>
+#include <iomanip>
+#include <mpi.h>
 
 // Dimension
 #define DIM 2
@@ -62,7 +64,7 @@ int main(int argc, char **argv) {
     {
     int id = omp_get_thread_num();
     double st = tsecond();
-    const int numOfParticles = 100000;
+    const int numOfParticles = 100;
     // Allocate space for position array
     double *loc = new double[numOfParticles * DIM];
     
