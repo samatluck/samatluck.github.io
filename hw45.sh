@@ -10,4 +10,4 @@
 #SBATCH --mem=128000
 module load intel-psxe
 module load petsc/3.5.4
-./benchmarkJacobi 2000
+./benchmarkJacobi 50000
