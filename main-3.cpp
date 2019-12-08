@@ -81,6 +81,7 @@ int main(int argc, char **argv) {
     }
     
     /// Compute Velocities
+#pragma omp for
     for (int p = 0; p < numOfParticles; p++) {
         /* zeros */
         vel[p * DIM] = 0.0;
@@ -105,7 +106,7 @@ int main(int argc, char **argv) {
     // Compute Average Velocity
     double vx = 0.0;
     double vy = 0.0;
-    #pragma omp for
+#pragma omp for
     for (int i = 0; i < numOfParticles; i++) {
         vx += vel[i * DIM];
         vy += vel[i * DIM + 1];
