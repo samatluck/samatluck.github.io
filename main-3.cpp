@@ -113,7 +113,7 @@ int main(int argc, char **argv) {
     vy /= numOfParticles;
  
     // Show Results
-    }
+    
     double et = tsecond();
     std::cout << "Mean Velocity = (" << vx << "," << vy << ")\n";
     std::cout << "Time cost = " << et - st << "(sec)\n";
@@ -123,5 +123,5 @@ int main(int argc, char **argv) {
     delete [] vel;
     delete [] foc;
     return 0;
-    }
+    }}
 
