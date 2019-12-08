@@ -68,7 +68,7 @@ int main(int argc, char **argv) {
     MPI_Comm_rank(MPI_COMM_WORLD,&myid);
 
     double st = tsecond();
-    const int numOfParticles = 10000;
+    const int numOfParticles = 100000;
     // Allocate space for position array
     double *loc = new double[numOfParticles * DIM];
     
