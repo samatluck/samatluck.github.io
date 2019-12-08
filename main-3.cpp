@@ -58,6 +58,10 @@ double term2(double r, double ep) {
 
 // Main Routine
 int main(int argc, char **argv) {
+    
+#pragma omp parallel
+    {
+    int id = omp_get_thread_num();
     double st = tsecond();
     const int numOfParticles = 100000;
     // Allocate space for position array
@@ -102,9 +106,11 @@ int main(int argc, char **argv) {
     // Compute Average Velocity
     double vx = 0.0;
     double vy = 0.0;
+        #pragma omp for
     for (int i = 0; i < numOfParticles; i++) {
         vx += vel[i * DIM];
         vy += vel[i * DIM + 1];
+    }
     }
     vx /= numOfParticles;
     vy /= numOfParticles;
