@@ -81,13 +81,13 @@ int main(int argc, char **argv){
     }
     
     /// Compute Velocities
-//#pragma omp parallel for
+#pragma omp parallel for
     for (int p = 0; p < numOfParticles; p++) {
         /* zeros */
         vel[p * DIM] = 0.0;
         vel[p * DIM + 1] = 0.0;
         
-        /* loop for particles  */
+    /* loop for particles  */
   
         for (int i = 0; i < numOfParticles; i++) {
             double dx = loc[p * DIM] - loc[i * DIM];
@@ -107,16 +107,17 @@ int main(int argc, char **argv){
     // Compute Average Velocity
     double vx = 0.0;
     double vy = 0.0;
- #pragma omp parallel for
+ //#pragma omp parallel for
     for (int i = 0; i < numOfParticles; i++) {
         vx += vel[i * DIM];
         vy += vel[i * DIM + 1];
     }
+    }
     vx /= numOfParticles;
     vy /= numOfParticles;
-        // Show Results
+    
+    // Show Results
     double et = tsecond();
-    }
     std::cout << "Mean Velocity = (" << vx << "," << vy << ")\n";
     std::cout << "Time cost = " << et - st << "(sec)\n";
     
