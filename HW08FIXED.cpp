@@ -56,7 +56,7 @@ int main(int argc, char *argv[]) {
     // send and receive data
     MPI_Status status;
     MPI::COMM_WORLD.Isend(aArray, size, MPI_DOUBLE, rightProc, tagSend); //,MPI_COMM_WORLD);
-    MPI::COMM_WORLD.Isend(bArray, size, MPI_DOUBLE, leftProc, tagRecv)//,MPI_COMM_WORLD,&status);
+    MPI::COMM_WORLD.Isend(bArray, size, MPI_DOUBLE, leftProc, tagRecv);//,MPI_COMM_WORLD,&status);
     
     // compute average
     average = 0;
