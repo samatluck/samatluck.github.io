@@ -88,32 +88,30 @@ int main(int argc, char **argv) {
         foc[i * DIM + 1] = (double)rand() / RAND_MAX - 0.5;
     }
    }
-        MPI_Bcast(aArray, num, MPI_DOUBLE, 0,MPI_COMM_WORLD);
-        MPI_Bcast(bArray, num, MPI_DOUBLE, 0,MPI_COMM_WORLD);
+        //Rank 0 sends array elements to all other ranks.
+        /* Broadcast */
+        MPI_Bcast(loc, num, MPI_DOUBLE, 0,MPI_COMM_WORLD);
+        MPI_Bcast(foc, num, MPI_DOUBLE, 0,MPI_COMM_WORLD);
  
-    /// Compute Velocities
-    int mystart = (num / numproc) * myid;
+ //FOR LOOP IMP STYLE SON
+    int mystart = (numOfParticles / numproc) * myid;
     int myend;
-    if (num % numproc > myid) {
+    if (numOfParticles % numproc > myid) {
         mystart += myid;
-        myend = mystart + (num / numproc) + 1;
+        myend = mystart + (numOfParticles / numproc) + 1;
     } else {
-        mystart += num % numproc;
-        myend = mystart + (num / numproc);
+        mystart += numOfParticles % numproc;
+        myend = mystart + (numOfParticles / numproc);
     }
     std::cout << "CPU" << myid << ":" << mystart << "~" << myend << std::endl;
-    int mysize = myend - mystart;
-
-    for (int i = mystart; i < myend; i++) {
-        cArray[i - mystart] = 0.0;
-        {
-    for (int p = 0; p < numOfParticles; p++) {
+    /// Compute Velocities
+    for (int p = mystart; p < myend; p++) {
         /* zeros */
         vel[p * DIM] = 0.0;
         vel[p * DIM + 1] = 0.0;
         
         /* loop for particles  */
-        for (int i = 0; i < numOfParticles; i++) {
+        for (int i = mystart; i < myend; i++) {
             double dx = loc[p * DIM] - loc[i * DIM];
             double dy = loc[p * DIM + 1] - loc[i * DIM + 1];
             double r = sqrt(dx * dx + dy * dy);
@@ -127,11 +125,10 @@ int main(int argc, char **argv) {
             vel[p * DIM + 1] += -foc[i * DIM + 1] * tr1 + tr2 * dy;
         }
     }
-        }
+
     // Compute Average Velocity
     double vx = 0.0;
     double vy = 0.0;
-
     for (int i = 0; i < numOfParticles; i++) {
         vx += vel[i * DIM];
         vy += vel[i * DIM + 1];
@@ -140,12 +137,7 @@ int main(int argc, char **argv) {
     vy /= numOfParticles;
  
     // Show Results
-    
     double et = tsecond();
-    
-    
-    MPI_Reduce(&vx, &vy, 1, MPI_DOUBLE, MPI_SUM, 0, MPI_COMM_WORLD);
-    
     if (myid == 0) {
     std::cout << "Mean Velocity = (" << vx << "," << vy << ")\n";
     }
@@ -155,8 +147,7 @@ int main(int argc, char **argv) {
     delete [] loc;
     delete [] vel;
     delete [] foc;
-    }
-    MPI::Finalize();
+    MPI_Finalize();
     return 0;
 }
 
