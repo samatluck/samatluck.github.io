@@ -64,7 +64,7 @@ int main(int argc, char **argv) {
     {
     int id = omp_get_thread_num();
     double st = tsecond();
-    const int numOfParticles = 100;
+    const int numOfParticles = 10000;
     // Allocate space for position array
     double *loc = new double[numOfParticles * DIM];
     
