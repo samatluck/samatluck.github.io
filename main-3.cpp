@@ -5,6 +5,9 @@
 #include <algorithm>
 #include <cmath>
 #include <sys/time.h>
+#include <iomanip>
+#include <cmath>
+#include <omp.h>
 
 // Dimension
 #define DIM 2
