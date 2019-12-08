@@ -67,7 +67,6 @@ int main(int argc, char **argv) {
     MPI_Comm_size(MPI_COMM_WORLD,&numproc);
     MPI_Comm_rank(MPI_COMM_WORLD,&myid);
 
-    int id = omp_get_thread_num();
     double st = tsecond();
     const int numOfParticles = 10000;
     // Allocate space for position array
