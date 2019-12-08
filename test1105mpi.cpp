@@ -2,8 +2,24 @@
 #include <iostream>
 #include <cstdlib>
 #include <cmath>
+#include <sys/time.h>
 #include <mpi.h>
 
+double tsecond() {
+    struct timeval tm;
+    double t;
+    static int base_sec = 0, base_usec = 0;
+    
+    gettimeofday(&tm, NULL);
+    if (base_sec == 0 && base_usec == 0) {
+        base_sec = tm.tv_sec;
+        base_usec = tm.tv_usec;
+        t = 0.0;
+    } else {
+        t = (double) (tm.tv_sec - base_sec) + ((double) (tm.tv_usec - base_usec)) / 1.0e6;
+    }
+    return t;
+}
 int main(int argc, char **argv) {
 	// Initialize
 	MPI_Init(&argc, &argv);
@@ -68,6 +84,7 @@ int main(int argc, char **argv) {
 	if (myid == 0) {
 		tcNorm = std::sqrt(tcNorm);
 		std::cout << "|C|=" << tcNorm << std::endl;
+         std::cout << "Time cost = " << et - st << "(sec)\n";
 	}
 
 	delete[] cArray;
