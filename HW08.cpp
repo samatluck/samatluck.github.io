@@ -18,8 +18,6 @@ int main(int argc, char *argv[]) {
 	MPI_Comm_size(MPI_COMM_WORLD,&numproc);
 	MPI_Comm_rank(MPI_COMM_WORLD,&myid);
     
-    if (myid == 0) {
-        std::cout << "Dead-Lock Test Ctrl+C to stop program\n";
     }
 
 	/* initialize random seed: */
@@ -57,10 +55,21 @@ int main(int argc, char *argv[]) {
 		std::cout << "Data send/receive\n";
 	}
 
+           // send and receive data NEW
+            MPI::Request r1;
+            MPI::Request r2;
+            if (myid == 0) {
+                r1 = MPI::COMM_WORLD.Isend(aArray, size, MPI_DOUBLE, rightProc, tagSend,MPI_COMM_WORLD);
+            }
+            if (myid == 1) {
+                r1 = MPI::COMM_WORLD.Irecv(bArray, size, MPI_DOUBLE, leftProc, tagRecv,MPI_COMM_WORLD,&status);
+            }
+
 	// send and receive data
-	MPI_Status status;
-	MPI_Send(aArray, size, MPI_DOUBLE, rightProc, tagSend,MPI_COMM_WORLD);
-	MPI_Recv(bArray, size, MPI_DOUBLE, leftProc, tagRecv,MPI_COMM_WORLD,&status);
+
+//	MPI_Status status;
+//	MPI_Send(aArray, size, MPI_DOUBLE, rightProc, tagSend,MPI_COMM_WORLD);
+//	MPI_Recv(bArray, size, MPI_DOUBLE, leftProc, tagRecv,MPI_COMM_WORLD,&status);
 
 	// compute average
 	average = 0;
