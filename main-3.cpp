@@ -58,8 +58,8 @@ double term2(double r, double ep) {
 
 // Main Routine
 int main(int argc, char **argv) {
-#pragma omp parallel
-    {
+//#pragma omp parallel
+   // {
     int id = omp_get_thread_num();
     double st = tsecond();
     const int numOfParticles = 100000;
@@ -111,7 +111,7 @@ int main(int argc, char **argv) {
     }
     vx /= numOfParticles;
     vy /= numOfParticles;
-    }
+   // }
     // Show Results
     double et = tsecond();
     std::cout << "Mean Velocity = (" << vx << "," << vy << ")\n";
