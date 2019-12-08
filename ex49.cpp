@@ -14,9 +14,7 @@ int main(int argc, char *argv[]) {
 	// get myid and # of processors 
 	int numproc = MPI::COMM_WORLD.Get_size();
 	int myid = MPI::COMM_WORLD.Get_rank();
-	if (myid == 0) {
-		std::cout << "Dead-Lock Test Ctrl+C to stop program\n";
-	}
+
 	/* set values */
 	int size = 10000;
 	double *a = new double[size];

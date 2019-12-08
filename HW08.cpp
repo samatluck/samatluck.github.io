@@ -17,6 +17,10 @@ int main(int argc, char *argv[]) {
 	int myid;
 	MPI_Comm_size(MPI_COMM_WORLD,&numproc);
 	MPI_Comm_rank(MPI_COMM_WORLD,&myid);
+    
+    if (myid == 0) {
+        std::cout << "Dead-Lock Test Ctrl+C to stop program\n";
+    }
 
 	/* initialize random seed: */
 	srand (myid);
