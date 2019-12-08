@@ -8,7 +8,7 @@
 #include <omp.h>
 #include <iomanip>
 #include <iomanip>
-//#include <mpi.h>
+#include <mpi.h>
 
 // Dimension
 #define DIM 2
@@ -60,8 +60,13 @@ double term2(double r, double ep) {
 
 // Main Routine
 int main(int argc, char **argv) {
-#pragma omp parallel
-    {
+   
+    MPI_Init(&argc, &argv);
+    int numproc;
+    int myid;
+    MPI_Comm_size(MPI_COMM_WORLD,&numproc);
+    MPI_Comm_rank(MPI_COMM_WORLD,&myid);
+
     int id = omp_get_thread_num();
     double st = tsecond();
     const int numOfParticles = 10000;
@@ -75,15 +80,33 @@ int main(int argc, char **argv) {
     double *vel = new double[numOfParticles * DIM];
     
     // Make Distribute particles and set forces
-    for (int i = 0; i < numOfParticles; i++) {
+   if (myid == 0) {
+       for (int i = 0; i < numOfParticles; i++) {
         loc[i * DIM] = (double)rand() / RAND_MAX;
         loc[i * DIM + 1] = (double)rand() / RAND_MAX;
         foc[i * DIM] = (double)rand() / RAND_MAX - 0.5;
         foc[i * DIM + 1] = (double)rand() / RAND_MAX - 0.5;
     }
-    
+   }
+        MPI_Bcast(aArray, num, MPI_DOUBLE, 0,MPI_COMM_WORLD);
+        MPI_Bcast(bArray, num, MPI_DOUBLE, 0,MPI_COMM_WORLD);
+ 
     /// Compute Velocities
-#pragma omp for
+    int mystart = (num / numproc) * myid;
+    int myend;
+    if (num % numproc > myid) {
+        mystart += myid;
+        myend = mystart + (num / numproc) + 1;
+    } else {
+        mystart += num % numproc;
+        myend = mystart + (num / numproc);
+    }
+    std::cout << "CPU" << myid << ":" << mystart << "~" << myend << std::endl;
+    int mysize = myend - mystart;
+
+    for (int i = mystart; i < myend; i++) {
+        cArray[i - mystart] = 0.0;
+        {
     for (int p = 0; p < numOfParticles; p++) {
         /* zeros */
         vel[p * DIM] = 0.0;
@@ -104,11 +127,11 @@ int main(int argc, char **argv) {
             vel[p * DIM + 1] += -foc[i * DIM + 1] * tr1 + tr2 * dy;
         }
     }
-    
+        }
     // Compute Average Velocity
     double vx = 0.0;
     double vy = 0.0;
-#pragma omp for
+
     for (int i = 0; i < numOfParticles; i++) {
         vx += vel[i * DIM];
         vy += vel[i * DIM + 1];
@@ -119,7 +142,13 @@ int main(int argc, char **argv) {
     // Show Results
     
     double et = tsecond();
+    
+    
+    MPI_Reduce(&vx, &vy, 1, MPI_DOUBLE, MPI_SUM, 0, MPI_COMM_WORLD);
+    
+    if (myid == 0) {
     std::cout << "Mean Velocity = (" << vx << "," << vy << ")\n";
+    }
     std::cout << "Time cost = " << et - st << "(sec)\n";
     
     // cleanup
@@ -127,6 +156,7 @@ int main(int argc, char **argv) {
     delete [] vel;
     delete [] foc;
     }
+    MPI::Finalize();
     return 0;
 }
 
