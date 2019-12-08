@@ -124,5 +124,5 @@ int main(int argc, char **argv) {
     delete [] foc;
     }
     return 0;
-    
+}
 
