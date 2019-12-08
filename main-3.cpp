@@ -57,8 +57,9 @@ double term2(double r, double ep) {
 // Main Routine
 
 int main(int argc, char **argv){
-#pragma omp parallel private(10)
-    {  // Parallel Section begins
+#pragma omp parallel
+    {
+    int id = omp_get_thread_num();
     double st = tsecond();
     const int numOfParticles = 10000;
     // Allocate space for position array
@@ -79,7 +80,7 @@ int main(int argc, char **argv){
     }
     
     /// Compute Velocities
-#pragma omp parallel for
+#pragma omp  for
     for (int p = 0; p < numOfParticles; p++) {
         /* zeros */
         vel[p * DIM] = 0.0;
