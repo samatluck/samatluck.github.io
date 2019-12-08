@@ -90,8 +90,8 @@ int main(int argc, char **argv) {
    }
         //Rank 0 sends array elements to all other ranks.
         /* Broadcast */
-        MPI_Bcast(loc, num, MPI_DOUBLE, 0,MPI_COMM_WORLD);
-        MPI_Bcast(foc, num, MPI_DOUBLE, 0,MPI_COMM_WORLD);
+        MPI_Bcast(loc, numOfParticles, MPI_DOUBLE, 0,MPI_COMM_WORLD);
+        MPI_Bcast(foc, numOfParticles, MPI_DOUBLE, 0,MPI_COMM_WORLD);
  
  //FOR LOOP IMP STYLE SON
     int mystart = (numOfParticles / numproc) * myid;
