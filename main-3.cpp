@@ -8,7 +8,7 @@
 #include <omp.h>
 #include <iomanip>
 #include <iomanip>
-#include <mpi.h>
+//#include <mpi.h>
 
 // Dimension
 #define DIM 2
