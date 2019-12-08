@@ -6,7 +6,6 @@
 #include <cmath>
 #include <sys/time.h>
 #include <iomanip>
-#include <cmath>
 #include <omp.h>
 
 // Dimension
@@ -58,13 +57,9 @@ double term2(double r, double ep) {
 }
 
 // Main Routine
-
-int main(int argc, char **argv){
-//#pragma omp parallel
-    {
-    int id = omp_get_thread_num();
+int main(int argc, char **argv) {
     double st = tsecond();
-    const int numOfParticles = 10000;
+    const int numOfParticles = 100000;
     // Allocate space for position array
     double *loc = new double[numOfParticles * DIM];
     
@@ -83,14 +78,12 @@ int main(int argc, char **argv){
     }
     
     /// Compute Velocities
-//#pragma omp  for
     for (int p = 0; p < numOfParticles; p++) {
         /* zeros */
         vel[p * DIM] = 0.0;
         vel[p * DIM + 1] = 0.0;
         
-    /* loop for particles  */
-  
+        /* loop for particles  */
         for (int i = 0; i < numOfParticles; i++) {
             double dx = loc[p * DIM] - loc[i * DIM];
             double dy = loc[p * DIM + 1] - loc[i * DIM + 1];
@@ -105,15 +98,13 @@ int main(int argc, char **argv){
             vel[p * DIM + 1] += -foc[i * DIM + 1] * tr1 + tr2 * dy;
         }
     }
-
+    
     // Compute Average Velocity
     double vx = 0.0;
     double vy = 0.0;
- //#pragma omp parallel for
     for (int i = 0; i < numOfParticles; i++) {
         vx += vel[i * DIM];
         vy += vel[i * DIM + 1];
-    }
     }
     vx /= numOfParticles;
     vy /= numOfParticles;
