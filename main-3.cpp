@@ -58,9 +58,9 @@ double term2(double r, double ep) {
 
 // Main Routine
 int main(int argc, char **argv) {
-//#pragma omp parallel
-   // {
-//    int id = omp_get_thread_num();
+#pragma omp parallel
+    {
+    int id = omp_get_thread_num();
     double st = tsecond();
     const int numOfParticles = 100000;
     // Allocate space for position array
@@ -111,8 +111,9 @@ int main(int argc, char **argv) {
     }
     vx /= numOfParticles;
     vy /= numOfParticles;
-   // }
+ 
     // Show Results
+    }
     double et = tsecond();
     std::cout << "Mean Velocity = (" << vx << "," << vy << ")\n";
     std::cout << "Time cost = " << et - st << "(sec)\n";
