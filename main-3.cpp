@@ -122,6 +122,7 @@ int main(int argc, char **argv) {
     delete [] loc;
     delete [] vel;
     delete [] foc;
+    }
     return 0;
-    }}
+    
 
