@@ -9,7 +9,7 @@
 #include <omp.h>
 
 int main(int argc, const char * argv[]) {
-
+    int id;
         if (argc < 2) {
             std::cout << argv[0] << " [size]\n";
             return 0;
