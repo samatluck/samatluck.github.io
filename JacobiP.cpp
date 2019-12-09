@@ -100,12 +100,13 @@ int main(int argc, const char * argv[]) {
         std::cout << "itr=" << count << std::endl;
         std::cout << "Time cost = " << tcost << "(sec)\n";
         std::cout << "Time cost (Wall CLock) = " << omp_tcost << "(sec)\n";
-    }
+    
     // check solution
     double r = 0.0;
     for (int i = 0; i < size; i++){
         double dr = sol[i] - xvec[i];
         r += dr * dr;
+    }
     }
     r = std::sqrt(r);
     std::cout << "|x - x0|=" << r << std::endl;
