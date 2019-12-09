@@ -1,0 +1,48 @@
+#
+# Makefile for PETSc
+# 
+ALL:	ex57 ex59
+#
+#
+ifeq "$(PETSC_DIR)" ""
+     # Linux
+     PETSC_DIR=/usr/lib/petsc
+      # MacOS
+      ifeq "$(shell uname)" "Darwin"
+           PETSC_DIR=/usr/local/opt/petsc
+      endif
+endif
+
+PETSC_VERSION_MAJOR := $(shell grep '\#define\ PETSC_VERSION_MAJOR' ${PETSC_DIR}/include/petscversion.h | awk '{print $$3}')
+PETSC_VERSION_MINOR := $(shell grep '\#define\ PETSC_VERSION_MINOR' ${PETSC_DIR}/include/petscversion.h | awk '{print $$3}')
+#
+$(info PETSC VERSION is ${PETSC_VERSION_MAJOR}.${PETSC_VERSION_MINOR})
+GT_3_6 := $(shell [ $(PETSC_VERSION_MAJOR) -gt 3 -o \( $(PETSC_VERSION_MAJOR) -eq 3 -a $(PETSC_VERSION_MINOR)  -ge 6 \) ] && echo true)
+ifeq ($(GT_3_6),true)
+        include ${PETSC_DIR}/lib/petsc/conf/variables
+        include ${PETSC_DIR}/lib/petsc/conf/rules
+else
+        include ${PETSC_DIR}/conf/variables
+        include ${PETSC_DIR}/conf/rules
+endif
+
+# ParMETIS
+PARMETIS_LIB= -lparmetis -lmetis
+
+EX57_OBJ= ex57.o
+EX59_OBJ= ex59.o
+#
+EX57_SRC=$(EX57_OBJ:.o=.cpp) 
+EX59_SRC=$(EX59_OBJ:.o=.cpp) 
+#
+CXX=mpicxx
+ex57:	$(EX57_OBJ) $(EX57_SRC) 
+	$(CXX) -o $@ $(EX57_OBJ) ${PETSC_LIB}
+
+ex59:	$(EX59_OBJ) $(EX59_SRC) 
+	$(CXX) -o $@ $(EX59_OBJ) ${PETSC_LIB} ${PARMETIS_LIB}
+
+#
+#
+#
+

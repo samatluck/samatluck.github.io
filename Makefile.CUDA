@@ -1,0 +1,54 @@
+#
+# Large Scale Computing
+#
+# GPU Computing with CUDA
+#
+#
+#
+.SUFFIXES : .o .c .cpp .cu
+#
+CC = gcc
+CXX = g++
+NVCC = nvcc
+#
+#
+BLASLIB = -lcublas -lcusparse
+CXXFLAGS=-O3
+CFLAGS=-O3
+# this is for tesla-00 and tesla-01
+ARCH=--gpu-architecture sm_13
+#
+TARGET=ex65 ex66 ex67 ex68 ex69
+#
+ALL: $(TARGET)
+#
+ex65:	ex65.o
+	$(NVCC) -o $@ $< 
+
+ex66:	ex66.o
+	$(NVCC) -o $@ $< 
+
+ex67:	ex67.o
+	$(NVCC) -o $@ $< 
+
+ex68:	ex68.o
+	$(NVCC) -o $@ $< 
+
+ex69:	ex69.o cg_cublas.o
+	$(NVCC) -o $@ $^ $(BLASLIB)  
+
+################################################################################
+# Rules and targets
+.c.o:
+	$(CC)  $(CFLAGS) -c $< 	
+
+.cpp.o:
+	$(CXX)  $(CXXFLAGS)  -c $< 	
+
+.cu.o:
+	$(NVCC)  $(CXXFLAGS)  -o $@ -c $< $(ARCH)
+
+clean:
+	rm -f *.o $(TARGET)
+#
+#
