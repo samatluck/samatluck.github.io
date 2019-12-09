@@ -110,7 +110,8 @@ int main(int argc, const char * argv[]) {
     }
     r = std::sqrt(r);
   
-    }
+    
     std::cout << "|x - x0|=" << r << std::endl;
+    }
     return 0;
 }
