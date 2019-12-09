@@ -12,3 +12,86 @@ module load intel-psxe
 module load petsc/3.5.4
 
 time mpirun ./ex57 -n 1000 -p 1 -q 16
+
+
+#!/bin/bash
+#SBATCH --qos=normal
+#SBATCH --job-name=hw9  
+#SBATCH --time=00:10:00
+#SBATCH --nodes=1 
+#SBATCH --ntasks-per-node=16
+#SBATCH --cpus-per-task=1 
+#SBATCH --gres=mic:0  
+#SBATCH --output=hw9.%j.out
+
+module load intel-psxe
+module load petsc/3.5.4
+
+time mpirun ./ex57 -n 1000 -p 2 -q 8
+
+
+#!/bin/bash
+#SBATCH --qos=normal
+#SBATCH --job-name=hw9  
+#SBATCH --time=00:10:00
+#SBATCH --nodes=1 
+#SBATCH --ntasks-per-node=16
+#SBATCH --cpus-per-task=1 
+#SBATCH --gres=mic:0  
+#SBATCH --output=hw9.%j.out
+
+module load intel-psxe
+module load petsc/3.5.4
+
+time mpirun ./ex57 -n 1000 -p 4 -q 4
+
+
+#!/bin/bash
+#SBATCH --qos=normal
+#SBATCH --job-name=hw9  
+#SBATCH --time=00:10:00
+#SBATCH --nodes=16 
+#SBATCH --ntasks-per-node=1
+#SBATCH --cpus-per-task=1 
+#SBATCH --gres=mic:0  
+#SBATCH --output=hw9.%j.out
+
+module load intel-psxe
+module load petsc/3.5.4
+
+time mpirun ./ex57 -n 1000 -p 4 -q 4
+
+
+#!/bin/bash
+#SBATCH --qos=normal
+#SBATCH --job-name=hw9  
+#SBATCH --time=00:10:00
+#SBATCH --nodes=8 
+#SBATCH --ntasks-per-node=2
+#SBATCH --cpus-per-task=1 
+#SBATCH --gres=mic:0  
+#SBATCH --output=hw9.%j.out
+
+module load intel-psxe
+module load petsc/3.5.4
+
+time mpirun ./ex57 -n 1000 -p 4 -q 4
+
+
+#!/bin/bash
+#SBATCH --qos=normal
+#SBATCH --job-name=hw9  
+#SBATCH --time=00:10:00
+#SBATCH --nodes=4 
+#SBATCH --ntasks-per-node=4
+#SBATCH --cpus-per-task=1 
+#SBATCH --gres=mic:0  
+#SBATCH --output=hw9.%j.out
+
+module load intel-psxe
+module load petsc/3.5.4
+
+time mpirun ./ex57 -n 1000 -p 4 -q 4
+
+
+
