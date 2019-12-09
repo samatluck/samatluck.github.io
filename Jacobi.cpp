@@ -1,4 +1,4 @@
-////
+//
 //  Jacobi
 //
 //  Created by Hideki Fujioka on 9/11/18.
@@ -6,11 +6,8 @@
 #include <iostream>
 #include <cmath>
 #include <algorithm>
-#include <omp.h>
 
 int main(int argc, const char * argv[]) {
-      #pragma omp parallel
-    {
     if (argc < 2) {
         std::cout << argv[0] << " [size]\n";
         return 0;
@@ -74,7 +71,6 @@ int main(int argc, const char * argv[]) {
         }
         
         // compute residual |r| = |b-Ax|
-   #pragma omp parallel for
         double r = 0.0;
         for (int i = 0 ; i < size ; i++){
             double sumAs = bvec[i];
@@ -94,11 +90,9 @@ int main(int argc, const char * argv[]) {
         }
     }
     double tcost = (clock() - start) / CLOCKS_PER_SEC;
-    double omp_tcost = omp_get_wtime() - omp_start;
     std::cout << "itr=" << count << std::endl;
     std::cout << "Time cost = " << tcost << "(sec)\n";
-    std::cout << "Time cost (Wall CLock) = " << omp_tcost << "(sec)\n";
-    }
+    
     // check solution
     double r = 0.0;
     for (int i = 0; i < size; i++){
