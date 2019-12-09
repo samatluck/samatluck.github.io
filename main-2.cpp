@@ -7,14 +7,14 @@
 #include <Eigen/Sparse>
 
 // index for all points
-int (int i, int num) {
-    return i + num;
-}
+//int (int i, int num) {
+   // return i + num;
+//}
 
 // index for interior points
-int (int i, int num) {
-    return i - 1 + (num - 2);
-}
+//int (int i, int num) {
+    //return i - 1 + (num - 2);
+//}
 
 int main(int argc, char **argv) {
     int num;
