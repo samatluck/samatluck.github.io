@@ -1,14 +1,1 @@
-#!/bin/bash
-#SBATCH --qos=normal
-#SBATCH --job-name=PETSc1  
-#SBATCH --time=00:10:00
-#SBATCH --nodes=1 
-#SBATCH --ntasks-per-node=1
-#SBATCH --cpus-per-task=1 
-#SBATCH --gres=mic:0  
-#SBATCH --output=hw4.%j.out
-#SBATCH --mem=128000
-module load intel-psxe
-module load petsc/3.5.4
-./benchmarkJacobi 2000
-Ff
+#!/bin/bash#SBATCH --qos=normal#SBATCH --job-name=PETSc1#SBATCH --time=00:10:00#SBATCH --nodes=1#SBATCH --ntasks-per-node=16#SBATCH --cpus-per-task=1#SBATCH --gres=mic:0#SBATCH --output=test-job.%j.outmodule load intel-psxemodule load petsc/3.5.4echo "DIR=" $SLURM_SUBMIT_DIRecho "TASKS_PER_NODE=" $SLURM_TASKS_PER_NODEecho "NNODES=" $SLURM_NNODESecho "NTASKS" $SLURM_NTASKSecho "JOB_CPUS_PER_NODE" $SLURM_JOB_CPUS_PER_NODEecho $SLURM_NODELISTtime mpirun ./ex57 -n 1000 -p 1 -q 16
