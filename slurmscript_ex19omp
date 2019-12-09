@@ -1,0 +1,37 @@
+#!/bin/bash
+#SBATCH --job-name=ex19omp    ### Job Name
+#SBATCH --qos=normal          ### Quality of Service (like a queue in PBS)
+#SBATCH --time=0-00:10:00     ### Wall clock time limit in Days-HH:MM:SS
+#SBATCH --nodes=1             ### Node count required for the job
+#SBATCH --ntasks-per-node=1   ### Number of tasks to be launched per Node
+#SBATCH --cpus-per-task=20    ### Number of cores per task
+
+# If Intel C++ is used, need this
+module load intel-psxe/2015-update1
+
+# Setting the number of threads
+#export OMP_NUM_THREADS=$SLURM_CPUS_PER_TASK
+
+export OMP_NUM_THREADS=1
+./ex19omp 50
+
+export OMP_NUM_THREADS=2
+./ex19omp 50
+
+export OMP_NUM_THREADS=4
+./ex19omp 50
+
+export OMP_NUM_THREADS=6
+./ex19omp 50
+
+export OMP_NUM_THREADS=8
+./ex19omp 50
+
+export OMP_NUM_THREADS=12
+./ex19omp 50
+
+export OMP_NUM_THREADS=16
+./ex19omp 50
+
+export OMP_NUM_THREADS=20
+./ex19omp 50
