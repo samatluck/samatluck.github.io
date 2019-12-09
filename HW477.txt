@@ -1,98 +1,14 @@
 #!/bin/bash
 #SBATCH --qos=normal
-#SBATCH --job-name=PETSc1  
+#SBATCH --job-name=hw9  
 #SBATCH --time=00:10:00
 #SBATCH --nodes=1 
-#SBATCH --ntasks-per-node=1
+#SBATCH --ntasks-per-node=16
 #SBATCH --cpus-per-task=1 
 #SBATCH --gres=mic:0  
-#SBATCH --output=hw4.%j.out
-#SBATCH --mem=128000
+#SBATCH --output=hw9.%j.out
+
 module load intel-psxe
 module load petsc/3.5.4
-icpc -O3 -o benchmarkJacobi benchmarkJacobi.cpp
-./benchmarkJacobi 10
-#!/bin/bash
-#SBATCH --qos=normal
-#SBATCH --job-name=PETSc1  
-#SBATCH --time=00:10:00
-#SBATCH --nodes=1 
-#SBATCH --ntasks-per-node=1
-#SBATCH --cpus-per-task=1 
-#SBATCH --gres=mic:0  
-#SBATCH --output=hw4.%j.out
-#SBATCH --mem=128000
-module load intel-psxe
-module load petsc/3.5.4
-icpc -O3 -o benchmarkJacobi benchmarkJacobi.cpp
-./benchmarkJacobi 100
-#!/bin/bash
-#SBATCH --qos=normal
-#SBATCH --job-name=PETSc1  
-#SBATCH --time=00:10:00
-#SBATCH --nodes=1 
-#SBATCH --ntasks-per-node=1
-#SBATCH --cpus-per-task=1 
-#SBATCH --gres=mic:0  
-#SBATCH --output=hw4.%j.out
-#SBATCH --mem=128000
-module load intel-psxe
-module load petsc/3.5.4
-icpc -O3 -o benchmarkJacobi benchmarkJacobi.cpp
-./benchmarkJacobi 1000
-#!/bin/bash
-#SBATCH --qos=normal
-#SBATCH --job-name=PETSc1  
-#SBATCH --time=00:10:00
-#SBATCH --nodes=1 
-#SBATCH --ntasks-per-node=1
-#SBATCH --cpus-per-task=1 
-#SBATCH --gres=mic:0  
-#SBATCH --output=hw4.%j.out
-#SBATCH --mem=128000
-module load intel-psxe
-module load petsc/3.5.4
-icpc -O3 -o benchmarkJacobi benchmarkJacobi.cpp
-./benchmarkJacobi 2500
-#!/bin/bash
-#SBATCH --qos=normal
-#SBATCH --job-name=PETSc1  
-#SBATCH --time=00:10:00
-#SBATCH --nodes=1 
-#SBATCH --ntasks-per-node=1
-#SBATCH --cpus-per-task=1 
-#SBATCH --gres=mic:0  
-#SBATCH --output=hw4.%j.out
-#SBATCH --mem=128000
-module load intel-psxe
-module load petsc/3.5.4
-icpc -O3 -o benchmarkJacobi benchmarkJacobi.cpp
-./benchmarkJacobi 3500
-#!/bin/bash
-#SBATCH --qos=normal
-#SBATCH --job-name=PETSc1  
-#SBATCH --time=00:10:00
-#SBATCH --nodes=1 
-#SBATCH --ntasks-per-node=1
-#SBATCH --cpus-per-task=1 
-#SBATCH --gres=mic:0  
-#SBATCH --output=hw4.%j.out
-#SBATCH --mem=128000
-module load intel-psxe
-module load petsc/3.5.4
-icpc -O3 -o benchmarkJacobi benchmarkJacobi.cpp
-./benchmarkJacobi 5000
-#!/bin/bash
-#SBATCH --qos=normal
-#SBATCH --job-name=PETSc1  
-#SBATCH --time=00:10:00
-#SBATCH --nodes=1 
-#SBATCH --ntasks-per-node=1
-#SBATCH --cpus-per-task=1 
-#SBATCH --gres=mic:0  
-#SBATCH --output=hw4.%j.out
-#SBATCH --mem=128000
-module load intel-psxe
-module load petsc/3.5.4
-icpc -O3 -o benchmarkJacobi benchmarkJacobi.cpp
-./benchmarkJacobi 10000
+
+time mpirun ./ex57 -n 1000 -p 1 -q 16
