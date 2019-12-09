@@ -16,6 +16,7 @@ int main(int argc, const char * argv[]) {
         }
 #pragma omp parallel
     {
+        id = omp_get_thread_num();
         int size = std::atoi(argv[1]);
         std::cout << "Size=" << size << std::endl;
         
@@ -108,7 +109,8 @@ int main(int argc, const char * argv[]) {
         r += dr * dr;
     }
     r = std::sqrt(r);
-    std::cout << "|x - x0|=" << r << std::endl;
+  
     }
+    std::cout << "|x - x0|=" << r << std::endl;
     return 0;
 }
