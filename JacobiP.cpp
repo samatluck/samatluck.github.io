@@ -9,13 +9,13 @@
 #include <omp.h>
 
 int main(int argc, const char * argv[]) {
-#pragma omp parallel
-    {
+
         if (argc < 2) {
             std::cout << argv[0] << " [size]\n";
             return 0;
         }
-        
+#pragma omp parallel
+    {
         int size = std::atoi(argv[1]);
         std::cout << "Size=" << size << std::endl;
         
