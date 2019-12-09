@@ -17,6 +17,7 @@ int main(int argc, const char * argv[]) {
 #pragma omp parallel
     {
         id = omp_get_thread_num();
+        std::cout <<  "hello from " << id << std::endl;
         int size = std::atoi(argv[1]);
         std::cout << "Size=" << size << std::endl;
         
