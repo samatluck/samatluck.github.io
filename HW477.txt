@@ -11,4 +11,4 @@
 module load intel-psxe
 module load petsc/3.5.4
 icpc -O3 -o benchmarkJacobi benchmarkJacobi.cpp
-./benchmarkJacobi 75
+./benchmarkJacobi 2500
