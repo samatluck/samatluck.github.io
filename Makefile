@@ -2,38 +2,49 @@
 #   C++ sample program
 ###################################
 #
-CXX	= g++-8
+#CXX	= g++
+CXX	= icpc 
 #
-CXXFLAGS  = -O3 
+CXXFLAGS  = -O3 -DNDEBUG -funroll-loops 
+#CXXFLAGS  = -g 
+#
+# Linux
+BLASLIB	= -lblas -latlas
+LAPACKLIB = -llapack -llapack_atlas 
+#
+ifeq "$(shell uname)" "Darwin"
+BLASLIB	= -lblas
+LAPACKLIB = -llapack
+endif
+#
+# FOR INTEL MKL ON SHPYNX
+ifeq "$(shell hostname)" "sphynx.ccs.tulane.edu" 
+MKLROOT=/usr/local/opt/intel/composerxe/mkl
+endif
+#
+ifneq "$(MKLROOT)" ""
+BLASLIB	=-L$(MKLROOT)/lib/intel64/ -DMKL -mkl
+CXXFLAGS  += -DMKL
+LAPACKLIB =
+endif
 #
 #
-EX27_OBJ=ex27.o cg.o
-EX28_OBJ=ex28.o cg.o
-EX29_OBJ=ex29.o cg.o
-EX29b_OBJ=ex29b.o cg_omp.o
+EX73_OBJ=ex73.o stokeslet2d.o
+EX74_OBJ=ex74.o stokeslet2dLapack.o stokeslet2d.o
+EX75_OBJ=ex75.o stokeslet2dEigen3.o 
 #
-TARGET= ex27 ex28 ex29 ex29b
+TARGET=ex73 ex74 ex75
 #
 all:	$(TARGET)	
 
-ex27	:$(EX27_OBJ) 
-	$(CXX) $(CXXFLAGS) -o $@ $(EX27_OBJ)
+ex73	:$(EX73_OBJ) 
+	$(CXX) $(CXXFLAGS) -o $@ $(EX73_OBJ)
 
-ex28	:$(EX28_OBJ) 
-	$(CXX) $(CXXFLAGS) -o $@ $(EX28_OBJ)
+ex74	:$(EX74_OBJ) 
+	$(CXX) $(CXXFLAGS) -o $@ $(EX74_OBJ) $(BLASLIB) $(LAPACKLIB)
 
-ex29	:$(EX29_OBJ) 
-	$(CXX) $(CXXFLAGS) -o $@ $(EX29_OBJ)
-
-ex29b	:$(EX29b_OBJ) 
-	$(CXX) $(CXXFLAGS) -o $@ $(EX29b_OBJ) -fopenmp
-
-###########################################
-cg.o:	cg.cpp cg.h
-	$(CXX) $(CXXFLAGS) -c cg.cpp
-
-cg_omp.o:	cg_omp.cpp cg_omp.h
-	$(CXX) $(CXXFLAGS) -c cg_omp.cpp -fopenmp
+ex75	:$(EX75_OBJ) 
+	$(CXX) $(CXXFLAGS) -o $@ $(EX75_OBJ) 
 
 .cpp.o:
 	$(CXX) $(CXXFLAGS) -c $< 

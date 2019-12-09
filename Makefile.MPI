@@ -1,0 +1,46 @@
+#      #
+#      Scalapack Sample
+#	12/5/2013 
+####################################
+#
+CXX	= mpicxx
+#
+CXXFLAGS	= -O3
+SCALAPACK_LIB	= -lscalapack-openmpi -lblacsCinit-openmpi -lblacs-openmpi \
+		-llapack -lblas
+ifeq "$(shell hostname)" "sphynx.ccs.tulane.edu"
+	MKLROOT=/usr/local/opt/intel/composerxe/mkl
+endif
+#
+ifneq "$(MKLROOT)" ""
+	CXXFLAGS+=  -DMKL_ILP64 -I$(MKLROOT)/include -mkl
+	MKL_LIB	= -mkl -lm
+	SCALAPACK_LIB=$(MKL_LIB)
+endif
+
+#
+#
+TARGET	= ex76 ex77
+all: $(TARGET)
+#
+ex76 : ex76.o stokeslet2dScaLapack.o ScalapackWrapper.o 
+	$(CXX) $(CXXFLAGS) -o $@ ex76.o stokeslet2dScaLapack.o ScalapackWrapper.o  $(SCALAPACK_LIB)
+
+ex77 : ex77.o stokeslet2d_dist.o 
+	$(CXX) $(CXXFLAGS) -o $@ ex77.o stokeslet2d_dist.o
+#
+#
+#
+ScalapackWrapper_debug.o : ScalapackWrapper.cpp ScalapackWrapper.h 
+	$(CXX) -DDEBUG $(CXXFLAGS) -o $@ -c $< 
+
+ScalapackWrapper.o : ScalapackWrapper.cpp ScalapackWrapper.h 
+	$(CXX) $(CXXFLAGS) -o $@ -c $<
+
+
+.cpp.o:
+	$(CXX) $(CXXFLAGS)  -c $< 
+#
+clean:
+	rm -f *.o $(TARGET)
+
