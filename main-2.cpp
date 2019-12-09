@@ -5,7 +5,6 @@
 #include <cmath>
 #include <Eigen/Core>
 #include <Eigen/Sparse>
-#include <Eigen/IterativeLinearSolvers>
 
 // index for all points
 int (int i, int num) {
