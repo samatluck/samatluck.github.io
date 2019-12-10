@@ -14,6 +14,9 @@ int main(int argc, const char * argv[]) {
             std::cout << argv[0] << " [size]\n";
             return 0;
         }
+    
+    double start = clock();
+    double omp_start = omp_get_wtime();
 #pragma omp parallel
     {
         id = omp_get_thread_num();
@@ -63,8 +66,6 @@ int main(int argc, const char * argv[]) {
         std::fill(sol0,sol0+size,0.0);
         const double tol = 1.0e-8;
         int count = 0;
-        double start = clock();
-        double omp_start = omp_get_wtime();
         while(1){
             // JACOBI step x(k+1) = A_ii^-1 (b - A_ij (i!=j) x(k))
             for (int i = 0 ; i < size ; i++){
