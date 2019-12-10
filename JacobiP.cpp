@@ -86,8 +86,8 @@ int main(int argc, const char * argv[]) {
                 for (int j = 0 ; j < size ; j++){
                     sumAs -= amat[i][j] * sol[j];
                 }
-#pragma omp parallel for
                 r += sumAs * sumAs;
+#pragma omp parallel for
                 sol0[i] = sol[i];
                 
             }
