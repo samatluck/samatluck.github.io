@@ -129,12 +129,12 @@ int main(int argc, char **argv) {
     vy /= numOfParticles;
     
     // Show Results
+     MPI::COMM_WORLD.Barrier();
     double et = tsecond();
     if (myid == 0) {
         std::cout << "Mean Velocity = (" << vx << "," << vy << ")\n";
-    }
     std::cout << "Time cost = " << et - st << "(sec)\n";
-    
+    }
     // cleanup
     delete [] loc;
     delete [] vel;
