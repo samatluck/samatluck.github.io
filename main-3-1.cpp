@@ -134,7 +134,7 @@ int main(int argc, char **argv) {
         vy += vel[i * DIM + 1];
     }
     
-    MPI_Reduce(&vx,&vy,1, MPI_DOUBLE, MPI_SUM, 0, MPI_COMM_WORLD);
+   // MPI_Reduce(&vx,&vy,1, MPI_DOUBLE, MPI_SUM, 0, MPI_COMM_WORLD);
     vx /= numOfParticles;
     vy /= numOfParticles;
  
