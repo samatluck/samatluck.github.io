@@ -61,10 +61,10 @@ double term2(double r, double ep) {
 // Main Routine
 int main(int argc, char **argv) {
     
-  //  MPI_Init(&argc, &argv);
-  //  int numproc;
-  //  int myid;
-  //  MPI_Comm_size(MPI_COMM_WORLD,&numproc);
+    MPI_Init(&argc, &argv);
+    int numproc;
+    int myid;
+    MPI_Comm_size(MPI_COMM_WORLD,&numproc);
     MPI_Comm_rank(MPI_COMM_WORLD,&myid);
     
     double st = tsecond();
@@ -79,18 +79,18 @@ int main(int argc, char **argv) {
     double *vel = new double[numOfParticles * DIM];
     
     // Make Distribute particles and set forces
- //   if (myid == 0) {
+    if (myid == 0) {
         for (int i = 0; i < numOfParticles; i++) {
             loc[i * DIM] = (double)rand() / RAND_MAX;
             loc[i * DIM + 1] = (double)rand() / RAND_MAX;
             foc[i * DIM] = (double)rand() / RAND_MAX - 0.5;
             foc[i * DIM + 1] = (double)rand() / RAND_MAX - 0.5;
         }
-/    }
+    }
     //Rank 0 sends array elements to all other ranks.
     /* Broadcast */
-   // MPI_Bcast(loc, numOfParticles * DIM, MPI_DOUBLE, 0,MPI_COMM_WORLD);
-  //  MPI_Bcast(foc, numOfParticles * DIM, MPI_DOUBLE, 0,MPI_COMM_WORLD);
+    MPI_Bcast(loc, numOfParticles * DIM, MPI_DOUBLE, 0,MPI_COMM_WORLD);
+    MPI_Bcast(foc, numOfParticles * DIM, MPI_DOUBLE, 0,MPI_COMM_WORLD);
     
   
    
@@ -129,17 +129,17 @@ int main(int argc, char **argv) {
     vy /= numOfParticles;
     
     // Show Results
- //    MPI::COMM_WORLD.Barrier();
     double et = tsecond();
-   // if (myid == 0) {
+    if (myid == 0) {
         std::cout << "Mean Velocity = (" << vx << "," << vy << ")\n";
+    }
     std::cout << "Time cost = " << et - st << "(sec)\n";
-  //  }
+    
     // cleanup
     delete [] loc;
     delete [] vel;
     delete [] foc;
-   // MPI_Finalize();
+    MPI_Finalize();
     return 0;
 }
 
