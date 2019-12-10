@@ -97,6 +97,8 @@ int main(int argc, const char * argv[]) {
                 std::cout << "count=" << count << " |r|=" << r << std::endl;
             }
         }
+      
+    }
         double tcost = (clock() - start) / CLOCKS_PER_SEC;
         double omp_tcost = omp_get_wtime() - omp_start;
         std::cout << "itr=" << count << std::endl;
@@ -110,9 +112,7 @@ int main(int argc, const char * argv[]) {
         r += dr * dr;
     }
     r = std::sqrt(r);
-  
-    
-    std::cout << "|x - x0|=" << r << std::endl;
-    }
+     std::cout << "|x - x0|=" << r << std::endl;
+
     return 0;
 }
