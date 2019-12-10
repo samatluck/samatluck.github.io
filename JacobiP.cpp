@@ -97,6 +97,15 @@ int main(int argc, const char * argv[]) {
                 std::cout << "count=" << count << " |r|=" << r << std::endl;
             }
         }
+        // check solution
+        double r = 0.0;
+        for (int i = 0; i < size; i++){
+            double dr = sol[i] - xvec[i];
+            r += dr * dr;
+        }
+        r = std::sqrt(r);
+        std::cout << "|x - x0|=" << r << std::endl;
+
       
     }
         double tcost = (clock() - start) / CLOCKS_PER_SEC;
@@ -105,14 +114,6 @@ int main(int argc, const char * argv[]) {
         std::cout << "Time cost = " << tcost << "(sec)\n";
         std::cout << "Time cost (Wall CLock) = " << omp_tcost << "(sec)\n";
     
-    // check solution
-    double r = 0.0;
-    for (int i = 0; i < size; i++){
-        double dr = sol[i] - xvec[i];
-        r += dr * dr;
-    }
-    r = std::sqrt(r);
-     std::cout << "|x - x0|=" << r << std::endl;
-
+  
     return 0;
 }
