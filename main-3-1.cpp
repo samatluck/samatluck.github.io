@@ -133,6 +133,8 @@ int main(int argc, char **argv) {
         vx += vel[i * DIM];
         vy += vel[i * DIM + 1];
     }
+    
+    MPI_Reduce(&vx,&vy,1, MPI_DOUBLE, MPI_VEL, 0, MPI_COMM_WORLD);
     vx /= numOfParticles;
     vy /= numOfParticles;
  
