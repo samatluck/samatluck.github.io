@@ -105,7 +105,7 @@ int main(int argc, char **argv) {
   //  std::cout << "CPU" << myid << ":" << mystart << "~" << myend << std::endl;
   //  int mysize = myend - mystart;
     /// Compute Velocities
-    for (int p = mystart; p < myend; p++) {
+   // for (int p = mystart; p < myend; p++) {
         /* zeros */
         vel[p * DIM] = 0.0;
         vel[p * DIM + 1] = 0.0;
@@ -129,7 +129,7 @@ int main(int argc, char **argv) {
     // Compute Average Velocity
     double vx = 0.0;
     double vy = 0.0;
-    for (int i = 0; i < mysize; i++) {
+    for (int i = 0; i < numOfParticles; i++) {
         vx += vel[i * DIM];
         vy += vel[i * DIM + 1];
     }
