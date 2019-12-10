@@ -18,7 +18,6 @@ int main(int argc, const char * argv[]) {
     double start = clock();
     double omp_start = omp_get_wtime();
     const double tol = 1.0e-8;
-    double sumAs = bvec[i];
     int count = 0;
 #pragma omp parallel
     {
@@ -83,10 +82,11 @@ int main(int argc, const char * argv[]) {
             double r = 0.0;
 #pragma omp parallel for
             for (int i = 0 ; i < size ; i++){
+                double sumAs = bvec[i];
                 for (int j = 0 ; j < size ; j++){
-#pragma omp parallel for
                     sumAs -= amat[i][j] * sol[j];
                 }
+#pragma omp parallel for
                 r += sumAs * sumAs;
                 sol0[i] = sol[i];
                 
