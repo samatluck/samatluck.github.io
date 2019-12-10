@@ -26,6 +26,6 @@ export OMP_NUM_THREADS=1
 module load intel-psxe/2015-update1
 
 
-export OMP_NUM_THREADS=2
+export OMP_NUM_THREADS=5
 
 ./a.out 500
