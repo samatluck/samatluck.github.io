@@ -93,19 +93,19 @@ int main(int argc, char **argv) {
         MPI_Bcast(foc, numOfParticles * DIM, MPI_DOUBLE, 0,MPI_COMM_WORLD);
  
  //FOR LOOP IMP STYLE SON
-   // int mystart = (numOfParticles / numproc) * myid;
-   // int myend;
-  //  if (numOfParticles % numproc > myid) {
-  //      mystart += myid;
-   //     myend = mystart + (numOfParticles / numproc) + 1;
-//    } else {
-     //   mystart += numOfParticles % numproc;
-      //  myend = mystart + (numOfParticles / numproc);
-   // }
-  //  std::cout << "CPU" << myid << ":" << mystart << "~" << myend << std::endl;
-  //  int mysize = myend - mystart;
+    int mystart = (numOfParticles / numproc) * myid;
+    int myend;
+    if (numOfParticles % numproc > myid) {
+        mystart += myid;
+        myend = mystart + (numOfParticles / numproc) + 1;
+    } else {
+        mystart += numOfParticles % numproc;
+        myend = mystart + (numOfParticles / numproc);
+    }
+    std::cout << "CPU" << myid << ":" << mystart << "~" << myend << std::endl;
+    int mysize = myend - mystart;
     /// Compute Velocities
-   // for (int p = mystart; p < myend; p++) {
+    for (int p = mystart; p < myend; p++) {
         /* zeros */
         vel[p * DIM] = 0.0;
         vel[p * DIM + 1] = 0.0;
@@ -129,12 +129,12 @@ int main(int argc, char **argv) {
     // Compute Average Velocity
     double vx = 0.0;
     double vy = 0.0;
-    for (int i = 0; i < numOfParticles; i++) {
+    for (int i = 0; i < mysize; i++) {
         vx += vel[i * DIM];
         vy += vel[i * DIM + 1];
     }
     
-   // MPI_Reduce(&vx,&vy,1, MPI_DOUBLE, MPI_SUM, 0, MPI_COMM_WORLD);
+    MPI_Reduce(&vx,&vy,1, MPI_DOUBLE, MPI_SUM, 0, MPI_COMM_WORLD);
     vx /= numOfParticles;
     vy /= numOfParticles;
  
