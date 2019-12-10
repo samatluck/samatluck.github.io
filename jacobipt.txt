@@ -12,7 +12,7 @@ module load intel-psxe/2015-update1
 
 export OMP_NUM_THREADS=1
 
-./JacobiP 500
+./a.out 500
 
 #!/bin/bash
 #SBATCH --job-name=hw3    ### Job Name
@@ -28,4 +28,4 @@ module load intel-psxe/2015-update1
 
 export OMP_NUM_THREADS=2
 
-./JacobiP 500
+./a.out 500
