@@ -80,7 +80,7 @@ int main(int argc, const char * argv[]) {
             // compute residual |r| = |b-Ax|
             
             double r = 0.0;
-#pragma omp parallel for private(i) lastprivate(sumAs)
+#pragma omp parallel for private(r) lastprivate(sumAs)
             for (int i = 0 ; i < size ; i++){
                 double sumAs = bvec[i];
                 for (int j = 0 ; j < size ; j++){
