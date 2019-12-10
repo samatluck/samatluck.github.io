@@ -93,17 +93,17 @@ int main(int argc, char **argv) {
         MPI_Bcast(foc, numOfParticles * DIM, MPI_DOUBLE, 0,MPI_COMM_WORLD);
  
  //FOR LOOP IMP STYLE SON
-    int mystart = (numOfParticles / numproc) * myid;
-    int myend;
-    if (numOfParticles % numproc > myid) {
-        mystart += myid;
-        myend = mystart + (numOfParticles / numproc) + 1;
-    } else {
-        mystart += numOfParticles % numproc;
-        myend = mystart + (numOfParticles / numproc);
-    }
-    std::cout << "CPU" << myid << ":" << mystart << "~" << myend << std::endl;
-    int mysize = myend - mystart;
+   // int mystart = (numOfParticles / numproc) * myid;
+   // int myend;
+  //  if (numOfParticles % numproc > myid) {
+  //      mystart += myid;
+   //     myend = mystart + (numOfParticles / numproc) + 1;
+//    } else {
+     //   mystart += numOfParticles % numproc;
+      //  myend = mystart + (numOfParticles / numproc);
+   // }
+  //  std::cout << "CPU" << myid << ":" << mystart << "~" << myend << std::endl;
+  //  int mysize = myend - mystart;
     /// Compute Velocities
     for (int p = mystart; p < myend; p++) {
         /* zeros */
