@@ -83,11 +83,12 @@ int main(int argc, const char * argv[]) {
 #pragma omp parallel for
             for (int i = 0 ; i < size ; i++){
                 double sumAs = bvec[i];
+#pragma omp parallel for
                 for (int j = 0 ; j < size ; j++){
                     sumAs -= amat[i][j] * sol[j];
                 }
+#pragma omp critical
                 r += sumAs * sumAs;
-#pragma omp parallel for
                 sol0[i] = sol[i];
                 
             }
