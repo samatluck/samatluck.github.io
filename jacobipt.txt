@@ -5,6 +5,7 @@
 #SBATCH --nodes=1             ### Node count required for the job
 #SBATCH --ntasks-per-node=1   ### Number of tasks to be launched per Node
 #SBATCH --cpus-per-task=10    ### Number of cores per task
+#SBATCH --output=hw3.%j.out
 
 module load intel-psxe/2015-update1
 
@@ -20,6 +21,7 @@ export OMP_NUM_THREADS=1
 #SBATCH --nodes=1             ### Node count required for the job
 #SBATCH --ntasks-per-node=1   ### Number of tasks to be launched per Node
 #SBATCH --cpus-per-task=10    ### Number of cores per task
+#SBATCH --output=hw3.%j.out
 
 module load intel-psxe/2015-update1
 
