@@ -53,11 +53,23 @@ int main(int argc, char *argv[]) {
         std::cout << "Data send/receive\n";
     }
     
-    // send and receive data
+    MPI::Request r1;
+    MPI::Request r2;
+   
+    r1 = MPI::COMM_WORLD.Isend(aArray, size, MPI_DOUBLE, leftProc, tagSend); //,MPI_COMM_WORLD);
+  
+    if (myid == leftProc) {
+        r2.Wait();
+    }
     
-    MPI::COMM_WORLD.Isend(aArray, size, MPI_DOUBLE, leftProc, tagSend); //,MPI_COMM_WORLD);
-    MPI::COMM_WORLD.Irecv(bArray, size, MPI_DOUBLE, rightProc, 4);
-      
+   
+
+    r2 = MPI::COMM_WORLD.Irecv(bArray, size, MPI_DOUBLE, rightProc, tagRecv);
+    
+    if (myid == rightProc)
+    {
+        r1.Wait();
+    }
     // compute average
     average = 0;
     for (int i = 0; i < size; i++) {
