@@ -54,8 +54,8 @@ int main(int argc, char *argv[]) {
     }
     
    
-   MPI_Request r1;
-   MPI_Request r2;
+    MPI::Request r1;
+    MPI::Request r2;
    r1 =  MPI::COMM_WORLD.Isend(aArray, size, MPI_DOUBLE, leftProc, tagSend); //,MPI_COMM_WORLD);
    r2 = MPI::COMM_WORLD.Irecv(bArray, size, MPI_DOUBLE, rightProc, tagRecv);
     
