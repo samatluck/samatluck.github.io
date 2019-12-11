@@ -60,8 +60,8 @@ int main(int argc, char *argv[]) {
     r2 =  MPI::COMM_WORLD.Irecv(bArray, size, MPI_DOUBLE, rightProc, tagRecv);
     
     MPI::Status status;
-    MPI::Wait(r1,&status);
-    MPI::Wait(r2,&status);
+    MPI::Wait(&r1,&status);
+    MPI::Wait(&r2,&status);
    
     // compute average
     average = 0;
