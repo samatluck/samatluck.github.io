@@ -79,10 +79,9 @@ int main(int argc, char **argv) {
         foc[i * DIM] = (double)rand() / RAND_MAX - 0.5;
         foc[i * DIM + 1] = (double)rand() / RAND_MAX - 0.5;
     }
-#pragma omp parallel {
     
-    int num_dev = omp_get_num_devices();
-    std::cout << "number of devices " << num_dev << std::endl;
+    int id = omp_get_thread_num();
+    int nthreads = omp_get_num_threads();
     
     /// Compute Velocities
 #pragma omp parallel for
