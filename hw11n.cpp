@@ -85,7 +85,7 @@ int main(int argc, char **argv) {
     int nthreads = omp_get_num_threads();
     
     /// Compute Velocities
-#pragma omp target device(0)
+//#pragma omp target device(0)
 #pragma omp parallel for
     for (int p = 0; p < numOfParticles; p++) {
         /* zeros */
@@ -93,7 +93,6 @@ int main(int argc, char **argv) {
         vel[p * DIM + 1] = 0.0;
         
         /* loop for particles  */
-#pragma omp target device(0)
 #pragma omp parallel for
         for (int i = 0; i < numOfParticles; i++) {
             double dx = loc[p * DIM] - loc[i * DIM];
