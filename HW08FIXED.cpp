@@ -55,8 +55,8 @@ int main(int argc, char *argv[]) {
     
     // send and receive data
     
-    MPI::COMM_WORLD.Isend(aArray, size, MPI_DOUBLE, leftProc, tagRecv); //,MPI_COMM_WORLD);
-    MPI::COMM_WORLD.Irecv(bArray, size, MPI_DOUBLE, rightProc, tagSend);
+    MPI::COMM_WORLD.Isend(aArray, size, MPI_DOUBLE, leftProc, tagSend); //,MPI_COMM_WORLD);
+    MPI::COMM_WORLD.Irecv(bArray, size, MPI_DOUBLE, rightProc, 4);
       
     // compute average
     average = 0;
