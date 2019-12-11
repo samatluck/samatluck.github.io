@@ -54,17 +54,16 @@ int main(int argc, char *argv[]) {
     }
     
    
-    MPI::Request r1;
-    MPI::Request r2;
+    MPI_Request r1;
+    MPI_Request r2;
     
-    r1 = MPI::COMM_WORLD.Isend(aArray, size, MPI_DOUBLE, rightProc, tagSend);
-    r2 = MPI::COMM_WORLD.Isend(bArray, size, MPI_DOUBLE, leftProc, tagRecv);
+    MPI_Isend(aArray, size, MPI_DOUBLE, rightProc, tagSend,MPI_COMM_WORLD,&r1);
+    MPI_Irecv(bArray, size, MPI_DOUBLE, leftProc, tagRecv,MPI_COMM_WORLD,&r2);
     
-   // MPI_Status status;
-   // MPI_Wait(&r1,&status);
-   // MPI_Wait(&r2,&status);
-    r1.Wait();
-    r2.Wait();
+        MPI_Status status;
+        MPI_Wait(&r1,&status);
+        MPI_Wait(&r2,&status);
+   
     // compute average
     average = 0;
     for (int i = 0; i < size; i++) {
