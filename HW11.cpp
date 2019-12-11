@@ -58,7 +58,7 @@ double term2(double r, double ep) {
 // Main Routine
 int main(int argc, char **argv) {
     double st = tsecond();
-    const int numOfParticles = 100000;
+    const int numOfParticles = 1000;
     // Allocate space for position array
     double *loc = new double[numOfParticles * DIM];
     
