@@ -24,6 +24,9 @@ double tsecond(); // timing method
 double term1(double r, double ep);// function term 1
 double term2(double r, double ep);// function term 2
 
+const int id = omp_get_thread_num();
+int nthreads = omp_get_num_threads();
+int totalProcs = omp_get_num_procs();
 // function definition
 // timing method
 double tsecond() {
@@ -81,9 +84,7 @@ int main(int argc, char **argv) {
     }
     
    
-    const int id = omp_get_thread_num();
-    int nthreads = omp_get_num_threads();
-    int totalProcs = omp_get_num_procs();
+
     
     /// Compute Velocities
 
