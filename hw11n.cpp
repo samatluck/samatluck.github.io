@@ -83,9 +83,11 @@ int main(int argc, char **argv) {
     const int num_dev = omp_get_num_devices();
     const int id = omp_get_thread_num();
     int nthreads = omp_get_num_threads();
+    int totalProcs = omp_get_num_procs();
     
     /// Compute Velocities
-//#pragma omp target device(0)
+
+#pragma omp target device(0)
 #pragma omp parallel for
     for (int p = 0; p < numOfParticles; p++) {
         /* zeros */
