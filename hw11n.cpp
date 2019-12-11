@@ -59,13 +59,10 @@ double term2(double r, double ep) {
 // Main Routine
 int main(int argc, char **argv) {
     
-#pragma omp parallel {
-    
-    int num_dev = omp_get_num_devices();
-    std::cout << "number of devices " << num_dev << std::endl;
+
     
     double st = tsecond();
-    const int numOfParticles = 100000;
+    const int numOfParticles = 1000;
     // Allocate space for position array
     double *loc = new double[numOfParticles * DIM];
     
@@ -82,6 +79,10 @@ int main(int argc, char **argv) {
         foc[i * DIM] = (double)rand() / RAND_MAX - 0.5;
         foc[i * DIM + 1] = (double)rand() / RAND_MAX - 0.5;
     }
+#pragma omp parallel {
+    
+    int num_dev = omp_get_num_devices();
+    std::cout << "number of devices " << num_dev << std::endl;
     
     /// Compute Velocities
 #pragma omp parallel for
