@@ -80,7 +80,7 @@ int main(int argc, char **argv) {
         foc[i * DIM + 1] = (double)rand() / RAND_MAX - 0.5;
     }
     
-    const int num_dev = omp_get_num_devices();
+   
     const int id = omp_get_thread_num();
     int nthreads = omp_get_num_threads();
     int totalProcs = omp_get_num_procs();
@@ -89,6 +89,7 @@ int main(int argc, char **argv) {
 
 #pragma omp target device(0)
 #pragma omp parallel for
+    const int num_dev = omp_get_num_devices();
     for (int p = 0; p < numOfParticles; p++) {
         /* zeros */
         vel[p * DIM] = 0.0;
