@@ -66,7 +66,7 @@ int main(int argc, char **argv) {
 
     
     double st = tsecond();
-    const int numOfParticles = 1000;
+    const int numOfParticles = 1500;
     // Allocate space for position array
     double *loc = new double[numOfParticles * DIM];
     
