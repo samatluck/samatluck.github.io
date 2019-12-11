@@ -50,14 +50,18 @@ int main(int argc, char *argv[]) {
     }
     MPI_Barrier(MPI_COMM_WORLD);
     if (myid == 0){
-        std::cout << "Data send/receive\n";
+    std::cout << "Data send/receive\n";
     }
     
-    // send and receive data
-    MPI_Status status;
-    MPI::COMM_WORLD.Isend(aArray, size, MPI_DOUBLE, rightProc, tagSend); //,MPI_COMM_WORLD);
-    MPI::COMM_WORLD.Isend(bArray, size, MPI_DOUBLE, leftProc, tagRecv);//,MPI_COMM_WORLD,&status);
+   
+   MPI_Request r1;
+   MPI_Request r2;
+   r1 =  MPI::COMM_WORLD.Isend(aArray, size, MPI_DOUBLE, leftProc, tagSend,MPI_COMM_WORLD); //,MPI_COMM_WORLD);
+   r2 = MPI::COMM_WORLD.Irecv(bArray, size, MPI_DOUBLE, rightProc, tagRecv,MPI_COMM_WORLD);
     
+   MPI_Wait(r1);
+  MPI_Wait(r2);
+   
     // compute average
     average = 0;
     for (int i = 0; i < size; i++) {
@@ -74,10 +78,11 @@ int main(int argc, char *argv[]) {
     }
     
     // wait until all processors come here
-    MPI_Barrier(MPI_COMM_WORLD);
-    if (myid == 0) {
-        std::cout << "Done\n";
-    }
+  //  MPI_Barrier(MPI_COMM_WORLD);
+  //  if (myid == 0) {
+ //       std::cout << "Done\n";
+    
     MPI_Finalize();
     return 0;
+    }
 }
