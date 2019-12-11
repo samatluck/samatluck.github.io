@@ -27,7 +27,7 @@ double term2(double r, double ep);// function term 2
 const int id = omp_get_thread_num();
 int nthreads = omp_get_num_threads();
 int totalProcs = omp_get_num_procs();
-int num_dev = omp_get_num_devices();
+//int num_dev = omp_get_num_devices();
 // function definition
 // timing method
 double tsecond() {
