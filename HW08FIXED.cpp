@@ -17,7 +17,7 @@ int main(int argc, char *argv[]) {
     int myid;
     MPI_Comm_size(MPI_COMM_WORLD,&numproc);
     MPI_Comm_rank(MPI_COMM_WORLD,&myid);
-    MPI_Status  status;
+    
     /* initialize random seed: */
     srand (myid);
     
@@ -53,15 +53,11 @@ int main(int argc, char *argv[]) {
         std::cout << "Data send/receive\n";
     }
     
-    MPI::Request r1;
-    MPI::Request r2;
-   
-    r1 = MPI::COMM_WORLD.Isend(aArray, size, MPI_DOUBLE, leftProc, tagSend); //,MPI_COMM_WORLD);
-  
-    MPI_WAIT (tagSend,)
-    r2 = MPI::COMM_WORLD.Irecv(bArray, size, MPI_DOUBLE, rightProc, tagRecv);
+    // send and receive data
+    MPI_Status status;
+    MPI::COMM_WORLD.Isend(aArray, size, MPI_DOUBLE, rightProc, tagSend); //,MPI_COMM_WORLD);
+    MPI::COMM_WORLD.Isend(bArray, size, MPI_DOUBLE, leftProc, tagRecv);//,MPI_COMM_WORLD,&status);
     
-   
     // compute average
     average = 0;
     for (int i = 0; i < size; i++) {
