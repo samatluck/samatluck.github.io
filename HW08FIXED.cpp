@@ -47,11 +47,11 @@ int main(int argc, char *argv[]) {
         if (p == myid){
             std::cout << "Rank" << myid << " sends data of average=" << average << " to Rank" << rightProc << " with tag=" << tagSend << std::endl;
         }
-    }
-    MPI_Barrier(MPI_COMM_WORLD);
-    if (myid == 0){
-        std::cout << "Data send/receive\n";
-    }
+   // }
+  // MPI_Barrier(MPI_COMM_WORLD);
+  //  if (myid == 0){
+   //     std::cout << "Data send/receive\n";
+  //  }
     
    
    
