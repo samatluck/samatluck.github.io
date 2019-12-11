@@ -54,9 +54,9 @@ int main(int argc, char *argv[]) {
 	}
 
 	// send and receive data
-	MPI_Status status;
-	MPI_Send(aArray, size, MPI_DOUBLE, rightProc, tagSend,MPI_COMM_WORLD);
-	MPI_Recv(bArray, size, MPI_DOUBLE, leftProc, tagRecv,MPI_COMM_WORLD,&status);
+	//MPI_Status status;
+	//MPI_Send(aArray, size, MPI_DOUBLE, rightProc, tagSend,MPI_COMM_WORLD);
+//	MPI_Recv(bArray, size, MPI_DOUBLE, leftProc, tagRecv,MPI_COMM_WORLD,&status);
 
 	// compute average
 	average = 0;
