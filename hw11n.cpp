@@ -88,8 +88,8 @@ int main(int argc, char **argv) {
     /// Compute Velocities
 
 #pragma omp target device(0)
-#pragma omp parallel {
-    const int num_dev = omp_get_num_devices();
+#pragma omp parallel for
+    int num_dev = omp_get_num_devices();
     for (int p = 0; p < numOfParticles; p++) {
         /* zeros */
         vel[p * DIM] = 0.0;
@@ -111,7 +111,7 @@ int main(int argc, char **argv) {
             vel[p * DIM + 1] += -foc[i * DIM + 1] * tr1 + tr2 * dy;
         }
     }
-}
+
     // Compute Average Velocity
     double vx = 0.0;
     double vy = 0.0;
