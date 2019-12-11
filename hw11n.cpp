@@ -114,7 +114,7 @@ int main(int argc, char **argv) {
         vx += vel[i * DIM];
         vy += vel[i * DIM + 1];
     }
-}
+
     vx /= numOfParticles;
     vy /= numOfParticles;
     
