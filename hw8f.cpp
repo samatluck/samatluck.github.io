@@ -56,8 +56,8 @@ int main(int argc, char *argv[]) {
    
     MPI_Request r1;
     MPI_Request r2;
-    MPI_Isend(aArray, size, MPI_DOUBLE, leftProc, tagSend,MPI_COMM_WORLD,&r1); //,MPI_COMM_WORLD);
-    MPI_Irecv(bArray, size, MPI_DOUBLE, rightProc, tagRecv,MPI_COMM_WORLD,&r2);
+    MPI_Isend(aArray, size, MPI_DOUBLE, rightProc, tagSend,MPI_COMM_WORLD,&r1); //,MPI_COMM_WORLD);
+    MPI_Irecv(bArray, size, MPI_DOUBLE, leftProc, tagRecv,MPI_COMM_WORLD,&r2);
     
     MPI_Status status;
     MPI_Wait(&r1,&status);
