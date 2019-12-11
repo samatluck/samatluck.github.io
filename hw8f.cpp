@@ -59,9 +59,9 @@ int main(int argc, char *argv[]) {
     MPI_Isend(aArray, size, MPI_DOUBLE, leftProc, tagSend,COMM_WORLD,&r1); //,MPI_COMM_WORLD);
     MPI_Irecv(bArray, size, MPI_DOUBLE, rightProc, tagRecv,COMM_WORLD,&r2);
     
-    MPI::Status status;
-    MPI::Wait(&r1,&status);
-    MPI::Wait(&r2,&status);
+    MPI_Status status;
+    MPI_Wait(&r1,&status);
+    MPI_Wait(&r2,&status);
    
     // compute average
     average = 0;
