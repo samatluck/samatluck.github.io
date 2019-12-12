@@ -57,7 +57,6 @@ double term1(double r, double ep) {
 
 // function term 2
 
-struct vector {
 double term2(double r, double ep) {
     double sq;
     sq = sqrt(r * r + ep * ep);
