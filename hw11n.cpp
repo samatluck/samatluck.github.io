@@ -64,7 +64,7 @@ double term2(double r, double ep) {
 // Main Routine
 int main(int argc, char **argv) {
     
-    int num_dev = omp_get_num_devices();
+   // int num_dev = omp_get_num_devices();
     
     double st = tsecond();
     const int numOfParticles = 1500;
