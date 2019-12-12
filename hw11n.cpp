@@ -68,6 +68,8 @@ int main(int argc, char **argv) {
     
     double st = tsecond();
     const int numOfParticles = 1500;
+    
+    int num_dev = omp_get_num_devices();
     // Allocate space for position array
     double *loc = new double[numOfParticles * DIM];
     
