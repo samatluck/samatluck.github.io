@@ -117,7 +117,7 @@ double *vel_dev = new double[10000];
 #pragma omp target if(dev != num_dev) device(dev) map(to:loc[mystart:myend]) map(to:foc[0:numOfParticles]) map(from:vel[0:mysize])
                 {// offload begins Transfer aArray[mystart:myend] bArray[0:num] from host to device.
 #pragma omp parallel for
-    for (int p = 0; p < myend; p++) {
+    for (int p = mystart; p < myend; p++) {
         /* zeros */
         vel[p * DIM] = 0.0;
         vel[p * DIM + 1] = 0.0;
