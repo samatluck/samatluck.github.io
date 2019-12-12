@@ -19,8 +19,7 @@
 // Blob Size
 #define EPSILON 0.005
 
-int num_dev = omp_get_num_devices();
-std::cout << "number of devices " << num_dev << std::endl;
+
 
 // function declaration
 double tsecond(); // timing method
@@ -66,7 +65,8 @@ double term2(double r, double ep) {
 // Main Routine
 int main(int argc, char **argv) {
     
-
+    int num_dev = omp_get_num_devices();
+    std::cout << "number of devices " << num_dev << std::endl;
     
     double st = tsecond();
     const int numOfParticles = 1500;
@@ -101,7 +101,7 @@ int main(int argc, char **argv) {
                     mystart += dev;
                     myend = mystart + (numOfParticles * DIM / numproc) + 1;
                 } else {
-                    mystart += num % numproc;
+                    mystart += numOfParticles * DIM % numproc;
                     myend = mystart + (numOfParticles * DIM / numproc);
                 }
                 int mysize = myend - mystart;
@@ -110,8 +110,8 @@ int main(int argc, char **argv) {
 
     
     /// Compute Velocities
-
-#pragma omp target if(dev != num_dev) device(dev) map(to:aArray[mystart:myend]) map(to:bArray[0:num]) map(from:cArray_dev[0:mysize])
+double *vel_dev = new double[mysize];
+#pragma omp target if(dev != num_dev) device(dev) map(to:loc[mystart:myend]) map(to:foc[0:numOfParticles * DIM]) map(from:cArray_dev[0:mysize])
                 {// offload begins Transfer aArray[mystart:myend] bArray[0:num] from host to device.
 #pragma omp parallel for
     for (int p = 0; p < numOfParticles; p++) {
@@ -136,8 +136,13 @@ int main(int argc, char **argv) {
         }
     }
                 }
+                for (int i = mystart ; i < myend ; i++){
+                    vel[i] = vel_dev[i - mystart];
+                }
+                delete [] vel_dev;
             }
         }
+    }
     // Compute Average Velocity
     double vx = 0.0;
     double vy = 0.0;
