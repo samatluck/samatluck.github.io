@@ -19,6 +19,9 @@
 // Blob Size
 #define EPSILON 0.005
 
+int num_dev = omp_get_num_devices();
+std::cout << "number of devices " << num_dev << std::endl;
+
 // function declaration
 double tsecond(); // timing method
 double term1(double r, double ep);// function term 1
@@ -92,14 +95,14 @@ int main(int argc, char **argv) {
 #pragma omp task firstprivate(dev)
             {
                 /* divide domain */
-                int mystart = (num / numproc) * dev;
+                int mystart = (numOfParticles * DIM / numproc) * dev;
                 int myend;
-                if (num % numproc > dev) {
+                if (numOfParticles * DIM % numproc > dev) {
                     mystart += dev;
-                    myend = mystart + (num / numproc) + 1;
+                    myend = mystart + (numOfParticles * DIM / numproc) + 1;
                 } else {
                     mystart += num % numproc;
-                    myend = mystart + (num / numproc);
+                    myend = mystart + (numOfParticles * DIM / numproc);
                 }
                 int mysize = myend - mystart;
                 
