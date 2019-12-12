@@ -22,6 +22,7 @@
 
 
 // function declaration
+#pragma omp declare target
 double tsecond(); // timing method
 double term1(double r, double ep);// function term 1
 double term2(double r, double ep);// function term 2
@@ -55,7 +56,7 @@ double term1(double r, double ep) {
 }
 
 // function term 2
-#pragma omp declare target
+
 struct vector {
 double term2(double r, double ep) {
     double sq;
