@@ -27,7 +27,7 @@ double term2(double r, double ep);// function term 2
 const int id = omp_get_thread_num();
 int nthreads = omp_get_num_threads();
 int totalProcs = omp_get_num_procs();
-//int num_dev = omp_get_num_devices();
+int num_dev = omp_get_num_devices();
 // function definition
 // timing method
 double tsecond() {
@@ -84,12 +84,32 @@ int main(int argc, char **argv) {
         foc[i * DIM + 1] = (double)rand() / RAND_MAX - 0.5;
     }
     
-   
+    int numproc = num_dev + 1;
+#pragma omp parallel num_threads(numproc)
+#pragma omp single
+    {
+        for (int dev = 0; dev < numproc ; dev++) {
+#pragma omp task firstprivate(dev)
+            {
+                /* divide domain */
+                int mystart = (num / numproc) * dev;
+                int myend;
+                if (num % numproc > dev) {
+                    mystart += dev;
+                    myend = mystart + (num / numproc) + 1;
+                } else {
+                    mystart += num % numproc;
+                    myend = mystart + (num / numproc);
+                }
+                int mysize = myend - mystart;
+                
+                // allocate local cArray
 
     
     /// Compute Velocities
 
-#pragma omp target device(0)
+#pragma omp target if(dev != num_dev) device(dev) map(to:aArray[mystart:myend]) map(to:bArray[0:num]) map(from:cArray_dev[0:mysize])
+                {// offload begins Transfer aArray[mystart:myend] bArray[0:num] from host to device.
 #pragma omp parallel for
     for (int p = 0; p < numOfParticles; p++) {
         /* zeros */
@@ -112,7 +132,9 @@ int main(int argc, char **argv) {
             vel[p * DIM + 1] += -foc[i * DIM + 1] * tr1 + tr2 * dy;
         }
     }
-
+                }
+            }
+        }
     // Compute Average Velocity
     double vx = 0.0;
     double vy = 0.0;
