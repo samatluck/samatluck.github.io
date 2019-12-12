@@ -55,12 +55,14 @@ double term1(double r, double ep) {
 }
 
 // function term 2
+#pragma omp declare target
+struct vector {
 double term2(double r, double ep) {
     double sq;
     sq = sqrt(r * r + ep * ep);
     return (sq + 2.0 * ep) / (sq + ep) / (sq + ep) / sq;
 }
-
+#pragma omp end declare target
 // Main Routine
 int main(int argc, char **argv) {
     
