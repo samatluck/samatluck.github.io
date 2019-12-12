@@ -123,6 +123,7 @@ double *vel_dev = new double[mysize];
         
         /* loop for particles  */
 #pragma omp parallel for
+
         for (int i = 0; i < numOfParticles; i++) {
             double dx = loc[p * DIM] - loc[i * DIM];
             double dy = loc[p * DIM + 1] - loc[i * DIM + 1];
