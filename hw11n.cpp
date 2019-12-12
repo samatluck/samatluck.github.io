@@ -29,7 +29,6 @@ double term2(double r, double ep);// function term 2
 const int id = omp_get_thread_num();
 int nthreads = omp_get_num_threads();
 int totalProcs = omp_get_num_procs();
-int num_dev = omp_get_num_devices();
 // function definition
 // timing method
 double tsecond() {
@@ -66,7 +65,6 @@ double term2(double r, double ep) {
 int main(int argc, char **argv) {
     
     int num_dev = omp_get_num_devices();
-    std::cout << "number of devices " << num_dev << std::endl;
     
     double st = tsecond();
     const int numOfParticles = 1500;
