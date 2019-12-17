@@ -13,8 +13,7 @@ int main(int argc, const char * argv[]) {
         std::cout << argv[0] << " [size]\n";
         return 0;
     }
-#pragma omp parallel
-    {
+#pragma omp declare target
     int id = omp_get_thread_num();
     int nthreads = omp_get_num_threads();
         
@@ -78,6 +77,7 @@ int main(int argc, const char * argv[]) {
         
         // compute residual |r| = |b-Ax|
         double r = 0.0;
+#pragma omp end declare target
 #pragma omp parallel for
         for (int i = 0 ; i < size ; i++){
             double sumAs = bvec[i];
@@ -111,7 +111,6 @@ int main(int argc, const char * argv[]) {
     }
 
     r = std::sqrt(r);
-    }
     std::cout << "|x - x0|=" << r << std::endl;
     return 0;
 }
