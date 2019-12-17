@@ -1,0 +1,19 @@
+#!/bin/bash
+#SBATCH --partition=interactive		# Partition
+#SBATCH --qos=interactive		# Quality of Service
+#SBATCH --job-name=COSC6200MIC  # Job Name
+#SBATCH --time=01:00:00		# WallTime
+#SBATCH --nodes=1 		# Number of Nodes
+#SBATCH --ntasks-per-node=20 	# Number of tasks (MPI presseces)
+#SBATCH --cpus-per-task=1 	# Number of processors per task OpenMP threads()
+#SBATCH --gres=mic:2  		# Number of Co-Processors
+
+module load intel-psxe/2016 # or intel-psxe/2015-update1
+
+export OFFLOAD_DEVICES=0,1
+export MIC_ENV_PREFIX=MIC
+export OMP_NUM_THREADS=$SLURM_CPUS_PER_TASK
+export MIC_OMP_NUM_THREADS=240
+export OFFLOAD_REPORT=2
+
+time ./hw11n
