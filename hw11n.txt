@@ -9,7 +9,7 @@
 #SBATCH --gres=mic:2  		# Number of Co-Processors
 #SBATCH --output=hw3.%j.out
 
-module load intel-psxe/2016 # or intel-psxe/2015-update1
+module load intel-psxe/2016 
 
 export OFFLOAD_DEVICES=0,1
 export MIC_ENV_PREFIX=MIC
