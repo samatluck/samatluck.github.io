@@ -113,19 +113,19 @@ int main(int argc, char **argv) {
 
     
     /// Compute Velocities
-double *vel_dev = new double[10000];
-#pragma omp target if(dev != num_dev) device(dev) map(to:loc[mystart:myend]) map(to:foc[0:numOfParticles]) map(from:vel[0:mysize])
+double *vel_dev = new double[mysize*DIM];
+#pragma omp target if(dev != num_dev) device(dev) map(to:loc[0:(numOfparticles*DIM)]) map(to:foc[0:(numOfParticles*DIM)]) map(from:vel_dev[0:(mysize*DIM)])
                 {// offload begins Transfer aArray[mystart:myend] bArray[0:num] from host to device.
 #pragma omp parallel for
     for (int p = mystart; p < myend; p++) {
         /* zeros */
-        vel[p * DIM] = 0.0;
-        vel[p * DIM + 1] = 0.0;
+        vel[(p - mystart) * DIM] = 0.0;
+        vel[(p - mystart) * DIM + 1] = 0.0;
         
         /* loop for particles  */
 //#pragma omp parallel for
 
-        for (int i = mystart; i < myend; i++) {
+        for (int i = mystart; i < numOfParticles; i++) {
             double dx = loc[p * DIM] - loc[i * DIM];
             double dy = loc[p * DIM + 1] - loc[i * DIM + 1];
             double r = sqrt(dx * dx + dy * dy);
