@@ -2,10 +2,15 @@
 //  Jacobi
 //
 //  Created by Hideki Fujioka on 9/11/18.
-//
 #include <iostream>
-#include <cmath>
+#include <cstdlib>
+#include <fstream>
+#include <iomanip>
 #include <algorithm>
+#include <cmath>
+#include <sys/time.h>
+#include <omp.h>
+
 
 int main(int argc, const char * argv[]) {
     if (argc < 2) {
