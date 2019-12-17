@@ -1,6 +1,5 @@
 #!/bin/bash
 #SBATCH --partition=interactive		# Partition
-#SBATCH --qos=interactive		# Quality of Service
 #SBATCH --qos=normal            # Quality of Service
 #SBATCH --job-name=hw3     # Job Name
 #SBATCH --time=00:10:00         # WallTime
