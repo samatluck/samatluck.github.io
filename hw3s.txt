@@ -1,14 +1,3 @@
-#!/bin/bash
-#SBATCH --partition=interactive		# Partition
-#SBATCH --qos=normal            # Quality of Service
-#SBATCH --job-name=hw3     # Job Name
-#SBATCH --time=00:10:00         # WallTime
-#SBATCH --nodes=1               # Number of Nodes
-#SBATCH --ntasks-per-node=1     # Number of tasks (MPI presseces)
-#SBATCH --cpus-per-task=1       # Number of processors per task OpenMP 
-#SBATCH --output=hw3.%j.out
-#SBATCH --gres=mic:1            # Number of Co-Processors
-export OMP_NUM_THREADS=2
-
-./a.out 500
-
+#!/bin/bash#SBATCH --qos=normal#SBATCH --job-name=hw3#SBATCH --time=00:10:00#SBATCH --nodes=1#SBATCH --ntasks-per-node=1#SBATCH --cpus-per-task=1#SBATCH --gres=mic:0#SBATCH --output=hw3.%j.out
+export OMP_NUM_THREADS=1
+module load intel-psxemodule load petsc/3.5.4./a.out 500
