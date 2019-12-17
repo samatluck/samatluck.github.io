@@ -109,8 +109,9 @@ int main(int argc, const char * argv[]) {
         double dr = sol[i] - xvec[i];
         r += dr * dr;
     }
-}
+
     r = std::sqrt(r);
+    }
     std::cout << "|x - x0|=" << r << std::endl;
     return 0;
 }
