@@ -98,14 +98,14 @@ int main(int argc, char **argv) {
 #pragma omp task firstprivate(dev)
             {
                 /* divide domain */
-                int mystart = (numOfParticles * DIM / numproc) * dev;
+                int mystart = (numOfParticles / numproc) * dev;
                 int myend;
-                if (numOfParticles * DIM % numproc > dev) {
+                if (numOfParticles % numproc > dev) {
                     mystart += dev;
                     myend = mystart + (numOfParticles * DIM / numproc) + 1;
                 } else {
-                    mystart += numOfParticles * DIM % numproc;
-                    myend = mystart + (numOfParticles * DIM / numproc);
+                    mystart += numOfParticles% numproc;
+                    myend = mystart + (numOfParticles/ numproc);
                 }
                 int mysize = myend - mystart;
                 
