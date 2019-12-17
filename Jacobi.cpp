@@ -99,6 +99,7 @@ int main(int argc, const char * argv[]) {
     double omp_tcost = omp_get_wtime() - omp_start;
     std::cout << "itr=" << count << std::endl;
     std::cout << "Time cost = " << tcost << "(sec)\n";
+    std::cout << "Time cost (WALL CLOCK)= " << omp_tcost << "(sec)\n";
     
     // check solution
     double r = 0.0;
