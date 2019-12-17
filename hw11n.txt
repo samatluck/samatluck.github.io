@@ -11,7 +11,7 @@
 
 module load intel-psxe/2015-update1
 
-export OFFLOAD_DEVICES=0
+export OFFLOAD_DEVICES=
 export MIC_ENV_PREFIX=MIC
 export OMP_NUM_THREADS=$SLURM_CPUS_PER_TASK
 export MIC_OMP_NUM_THREADS=240
