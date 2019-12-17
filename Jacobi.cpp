@@ -59,6 +59,7 @@ int main(int argc, const char * argv[]) {
     const double tol = 1.0e-8;
     int count = 0;
     double start = clock();
+    double omp_start = omp_get_wtime();
     while(1){
         // JACOBI step x(k+1) = A_ii^-1 (b - A_ij (i!=j) x(k))
         for (int i = 0 ; i < size ; i++){
@@ -90,6 +91,7 @@ int main(int argc, const char * argv[]) {
         }
     }
     double tcost = (clock() - start) / CLOCKS_PER_SEC;
+    double omp_tcost = omp_get_wtime() - omp_start;
     std::cout << "itr=" << count << std::endl;
     std::cout << "Time cost = " << tcost << "(sec)\n";
     
