@@ -126,8 +126,8 @@ double *vel_dev = new double[mysize*DIM];
 //#pragma omp parallel for
 
         for (int i = mystart; i < numOfParticles; i++) {
-            double dx = loc[p * DIM] - loc[i * DIM];
-            double dy = loc[p * DIM + 1] - loc[i * DIM + 1];
+            double dx = loc[(p - mystart) * DIM] - loc[i * DIM];
+            double dy = loc[(p - mystart) * DIM + 1] - loc[i * DIM + 1];
             double r = sqrt(dx * dx + dy * dy);
             
             double tr1 = term1(r, EPSILON) / (4.0 * M_PI);
