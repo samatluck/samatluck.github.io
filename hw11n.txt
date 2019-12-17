@@ -11,10 +11,10 @@
 
 module load intel-psxe/2015-update1
 
-export OFFLOAD_DEVICES=
+export OFFLOAD_DEVICES=0,1
 export MIC_ENV_PREFIX=MIC
 export OMP_NUM_THREADS=$SLURM_CPUS_PER_TASK
 export MIC_OMP_NUM_THREADS=240
 export OFFLOAD_REPORT=2
 
-time ./test1125
+time ./hw11n
