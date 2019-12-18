@@ -42,7 +42,7 @@ int main(int argc, char **argv) {
         return 0;
     }
 
-    }
+    
     
 //    int num = std::atoi(argv[1]);
 //    std::cout << "Number of Points=" << num << std::endl;
