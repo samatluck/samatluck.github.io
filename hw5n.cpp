@@ -51,9 +51,9 @@ int main(int argc, char **argv) {
  //double *phi0 = new double[num];
  //   double *rhs = new double[num];
 
-for (int n = 0; n < num; n++) {
+//for (int n = 0; n < num; n++) {
     phi[n] = 0.0;
-}
+//}
 double dx = 1.0 / (num - 1);
 
 
@@ -67,6 +67,7 @@ double dx = 1.0 / (num - 1);
 Eigen::VectorXd rhs(num);
 // vector for solution
 Eigen::VectorXd phi0(num);
+Eigen::VectorXd phi(num);
 
 // set up Matrix
 double start = clock();
@@ -99,12 +100,11 @@ std::cout << "Time cost solver = " << tcost2 - tcost << "(sec)\n";
 std::cout << "#iterations:     " << solver.iterations() << std::endl;
 std::cout << "estimated error: " << solver.error() << std::endl;
 
-// restore solution
-for (int i = 1; i < num - 1; i++) {
-    for (int j = 1; j < num - 1; j++) {
-        phi[gIdx(i, j, num)] = sol(iIdx(i, j, num));
+    // restore solution
+    for (int i = 0; i < num - 1; i++) {
+        phi[(i, num)] = sol((i, num));
     }
-}
+
 
 // Output Result
 std::ofstream ofile;
@@ -115,7 +115,7 @@ for (int i = 0; i < num; i++) {
     for (int j = 0; j < num; j++) {
         double x = -1.0 + 2.0 * i / (num - 1);
         double y = -1.0 + 2.0 * j / (num - 1);
-        ofile << x << " " << y << " " << phi[gIdx(i, j, num)] << std::endl;
+        ofile << x << " " << y << " " << phi[(i, num)] << std::endl;
     }
 }
 ofile.close();
