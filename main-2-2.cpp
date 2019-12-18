@@ -55,7 +55,7 @@ int main(int argc, char **argv) {
     // set up Matrix
     double start = clock();
     for (int i = 1; i < num - 1; i++) {
-        int n= i-1;
+        for (int n = 1; i < n - 1; i++){
         sol(n) = phi[(i, num)];
         
         // RHS
@@ -78,6 +78,7 @@ int main(int argc, char **argv) {
             rhs(n) -= ((-(dx*dx)/d)*exp(i)) - a;
         }
         
+    }
     }
     
     double tcost = (clock() - start) / CLOCKS_PER_SEC;
