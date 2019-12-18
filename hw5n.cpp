@@ -47,12 +47,12 @@ int main(int argc, char **argv) {
 //    int num = std::atoi(argv[1]);
 //    std::cout << "Number of Points=" << num << std::endl;
     
-    double *phi = new double[num];
+  //  double *phi = new double[num];
  //double *phi0 = new double[num];
  //   double *rhs = new double[num];
 
 //for (int n = 0; n < num; n++) {
-    phi[n] = 0.0;
+   // phi[n] = 0.0;
 //}
 double dx = 1.0 / (num - 1);
 
@@ -93,7 +93,7 @@ const double tol = 1.0e-8;
 Eigen::ConjugateGradient < Eigen::SparseMatrix<double> > solver;
 solver.setTolerance(tol);
 solver.compute(phi);
-sol = solver.solve(rhs);
+*phi0 = solver.solve(rhs);
 
 double tcost2 = (clock() - start) / CLOCKS_PER_SEC;
 std::cout << "Time cost solver = " << tcost2 - tcost << "(sec)\n";
